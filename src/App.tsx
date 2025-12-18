@@ -1,14 +1,29 @@
+import { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { VideoHero } from './components/VideoHero';
 import { WhyChooseSection } from './components/WhyChooseSection';
 import { IndustriesSection } from './components/IndustriesSection';
 import { HistorySection } from './components/HistorySection';
-import {TestimonialsSection} from './components/TestimonialsSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { PageLoader } from './components/PageLoader';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate initial page loading; you can adjust the timeout as needed
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1900);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
+      {isLoading && <PageLoader />}
+
       <Navbar />
       
       {/* Video Hero Section */}
@@ -38,7 +53,11 @@ export default function App() {
       {/* Card 1 */}
       <div className="flex flex-col items-center">
         <div className="w-20 h-20 bg-[#f8be4c] rounded-full flex items-center justify-center shadow-lg">
-          <img src="/icons/projects.svg" className="w-10 h-10" alt="Projects Icon" />
+          <img 
+            src={`${import.meta.env.BASE_URL}icons/projects.svg`}
+            className="w-10 h-10 object-contain" 
+            alt="Projects Icon"
+          />
         </div>
         <h3 className="text-4xl font-bold text-[#1a2c6d] mt-4">1000+</h3>
         <p className="text-gray-600 mt-1">Projects Delivered</p>
@@ -47,7 +66,11 @@ export default function App() {
       {/* Card 2 */}
       <div className="flex flex-col items-center">
         <div className="w-20 h-20 bg-[#f8be4c] rounded-full flex items-center justify-center shadow-lg">
-          <img src="/icons/bag.svg" className="w-10 h-10" alt="Experience Icon" />
+          <img 
+            src={`${import.meta.env.BASE_URL}icons/bag.svg`}
+            className="w-10 h-10 object-contain" 
+            alt="Experience Icon"
+          />
         </div>
         <h3 className="text-4xl font-bold text-[#1a2c6d] mt-4">28+</h3>
         <p className="text-gray-600 mt-1">Years of Expertise</p>
@@ -56,7 +79,11 @@ export default function App() {
       {/* Card 3 */}
       <div className="flex flex-col items-center">
         <div className="w-20 h-20 bg-[#f8be4c] rounded-full flex items-center justify-center shadow-lg">
-          <img src="/icons/repeat.svg" className="w-10 h-10" alt="Repeat Orders Icon" />
+          <img 
+            src={`${import.meta.env.BASE_URL}icons/repeat.svg`}
+            className="w-10 h-10 object-contain" 
+            alt="Repeat Orders Icon"
+          />
         </div>
         <h3 className="text-4xl font-bold text-[#1a2c6d] mt-4">65%</h3>
         <p className="text-gray-600 mt-1">Repeat Orders</p>
@@ -65,7 +92,11 @@ export default function App() {
       {/* Card 4 */}
       <div className="flex flex-col items-center">
         <div className="w-20 h-20 bg-[#f8be4c] rounded-full flex items-center justify-center shadow-lg">
-          <img src="/icons/clock.svg" className="w-10 h-10" alt="Safe Man Hours Icon" />
+          <img 
+            src={`${import.meta.env.BASE_URL}icons/clock.svg`}
+            className="w-10 h-10 object-contain" 
+            alt="Safe Man Hours Icon"
+          />
         </div>
         <h3 className="text-4xl font-bold text-[#1a2c6d] mt-4">60M+</h3>
         <p className="text-gray-600 mt-1">Safe Working Hours</p>
