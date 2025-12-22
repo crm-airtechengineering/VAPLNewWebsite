@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent } from './ui/card'
+import { Card, CardContent } from './ui/card';
 import { 
   Settings, 
   Award, 
@@ -7,7 +7,6 @@ import {
   TrendingUp, 
   Hammer, 
   CheckCircle, 
-  ShieldCheck 
 } from 'lucide-react';
 
 interface FeatureCardProps {
@@ -18,14 +17,17 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
   return (
-    <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-      <CardContent className="flex flex-col items-center text-center p-6">
-        <div className="w-16 h-16 rounded-full bg-[#766b68] flex items-center justify-center mb-4">
+    <Card className="bg-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl cursor-default border-base">
+      <CardContent className="flex flex-col items-center text-center p-8">
+        {/* Icon Container with slight pulse effect on hover */}
+        <div className="w-16 h-16 rounded-full bg-[#766b68] flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[#4A3F35]">
           <div className="text-white">
             {icon}
           </div>
         </div>
-        <h3 className="mb-3 text-xl font-semibold">{title}</h3>
+        
+        <h3 className="mb-3 text-xl font-bold text-[#4A3F35]">{title}</h3>
+        
         <p className="text-gray-600 text-base leading-relaxed">
           {description}
         </p>
@@ -65,27 +67,26 @@ export const WhyChooseSection: React.FC = () => {
       icon: <CheckCircle size={28} />,
       title: 'Approved by Leading Consultants',
       description: 'Trusted and recommended by top MEP and HVAC consultants, architects, and engineers for quality of quality, safety, and technical compliance.'
-    },
-    // {
-    //   icon: <ShieldCheck size={28} />,
-    //   title: 'Standards Compliant & Certifications',
-    //   description: 'Proudly adhere to global standards including ASHRAE, ISHRAE, and ISO certifications, maintaining high energy auditors ensuring sustainable and compliant every time.'
-    // }
+    }
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-br from-green-50 via-blue-50 to-green-50">
+    <section className="py-20 bg-gradient-to-br from-green-50 via-blue-50 to-green-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-[#4A3F35] mb-4 text-3xl md:text-4xl font-bold">
+        
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h2 className="text-[#4A3F35] mb-4 text-3xl md:text-5xl font-bold">
             Why Choose Vakharia Airtech?
           </h2>
-          <p className="text-gray-600 max-w-3xl text-lg font-semibold mx-auto">
-            Discover what sets us apart as the preferred HVAC solutions provider across diverse industries
+          <div className="w-24 h-1 bg-[#766b68] mx-auto mb-6 rounded-full"></div>
+          <p className="text-gray-700 max-w-3xl text-lg font-medium mx-auto">
+            Discover what sets us apart as the preferred HVAC solutions provider across diverse industries.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -95,6 +96,7 @@ export const WhyChooseSection: React.FC = () => {
             />
           ))}
         </div>
+        
       </div>
     </section>
   );

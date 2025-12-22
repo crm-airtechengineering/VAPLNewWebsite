@@ -12,19 +12,10 @@ export function Navbar() {
     { 
       name: 'About Us', 
       href: 'aboutus', 
-      // hasDropdown: true,
-      // dropdownItems: [
-      //   { name: 'Air Compressors', href: '#air-compressors' },
-      //   { name: 'Air Dryers', href: '#air-dryers' },
-      //   { name: 'Air Filters', href: '#air-filters' },
-      //   { name: 'Nitrogen Generators', href: '#nitrogen-generators' },
-      //   { name: 'Compressed Air Piping', href: '#compressed-air-piping' },
-      //   { name: 'Energy Saving Solutions', href: '#energy-saving' },
-      // ]
     },
     { 
-      name: 'Products', 
-      href: 'products',
+      name: 'Solutions', 
+      href: 'solutions',
       hasDropdown: true,
       dropdownItems: [
         { name: 'VRV X', href: '#rotary-screw' },
@@ -76,13 +67,6 @@ export function Navbar() {
     { 
       name: 'Contact Us', 
       href: 'contactus',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Get in Touch', href: '#get-in-touch' },
-        { name: 'Request Quote', href: '#request-quote' },
-        { name: 'Service Support', href: '#service-support' },
-        { name: 'Locations', href: '#locations' },
-      ]
     },
   ];
 
