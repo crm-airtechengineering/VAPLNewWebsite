@@ -9,9 +9,9 @@ export function VideoHero() {
   const slides = [
     {
       id: 1,
-      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-      title: 'Gas Turbine Inlet Air Cooling',
-      subtitle: 'Advanced cooling solutions for optimal performance',
+      videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      title: 'Industrial Ventilation',
+      subtitle: 'Clean air solutions for industrial environments',
     },
     {
       id: 2,
@@ -21,10 +21,12 @@ export function VideoHero() {
     },
     {
       id: 3,
-      videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      title: 'Industrial Ventilation',
-      subtitle: 'Clean air solutions for industrial environments',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      title: 'Gas Turbine Inlet Air Cooling',
+      subtitle: 'Advanced cooling solutions for optimal performance',
     },
+    
+    
   ];
 
   const goToPrevious = () => {

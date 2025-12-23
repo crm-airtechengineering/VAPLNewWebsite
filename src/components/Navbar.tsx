@@ -69,11 +69,11 @@ export function Navbar() {
       {/* UX Rationale: max-w-[95%] reduces the large white side-gutters. 
           px-2 ensures content doesn't touch the very edge on mobile. 
       */}
-      <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 sm:px-4 lg:px-20">
+      <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 sm:px-2 lg:px-4">
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex items-center justify-center">
             <a href="/">
               <img 
                 src={Logo} 
@@ -87,7 +87,7 @@ export function Navbar() {
               - flex-1 and justify-center centers the links.
               - gap-x-4 to gap-x-8 ensures equal spacing that scales.
           */}
-          <div className="hidden md:flex flex-1 justify-center items-center gap-x-4 lg:gap-x-10 xl:gap-x-20">
+          <div className="hidden md:flex flex-1 justify-center items-center gap-x-4 lg:gap-x-6 xl:gap-x-16">
             {navLinks.map((link) => (
               link.hasDropdown ? (
                 <div
@@ -134,7 +134,7 @@ export function Navbar() {
                 className="p-2 text-gray-700 hover:text-blue-700 transition-colors"
                 aria-label="Search technical products"
             >
-              <Search className="w-5 h-5 lg:w-6 lg:h-6" />
+              <Search className="w-5 h-5 lg:w-5 lg:h-5" />
             </button>
             
             {/* Mobile Menu Toggle */}
