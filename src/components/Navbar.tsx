@@ -69,7 +69,7 @@ export function Navbar() {
       {/* UX Rationale: max-w-[95%] reduces the large white side-gutters. 
           px-2 ensures content doesn't touch the very edge on mobile. 
       */}
-      <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 sm:px-4 lg:px-10">
+      <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 sm:px-4 lg:px-20">
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
