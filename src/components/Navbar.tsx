@@ -9,7 +9,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'About Us', href: '/' },
     
     { 
       name: 'Solutions', 
@@ -61,7 +61,7 @@ export function Navbar() {
         { name: 'Apply Now', href: '#apply' },
       ]
     },
-    { name: 'Contact Us', href: '/contact' },
+    { name: 'Contact Us', href: '/' },
   ];
 
   return (
