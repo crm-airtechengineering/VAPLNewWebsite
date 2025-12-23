@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Search } from 'lucide-react';
 import Logo from '../assets/Vakharia-Airtech-Logo.png';
-import { Search } from "lucide-react";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,27 +8,26 @@ export function Navbar() {
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
 
   const navLinks = [
-    { 
-      name: 'About Us', 
-      href: 'aboutus', 
-    },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    
     { 
       name: 'Solutions', 
-      href: 'solutions',
+      href: '/solutions',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'VRV X', href: '#rotary-screw' },
-        { name: 'VRV Home Series', href: '#reciprocating' },
-        { name: 'VRVX III Water Cooled System', href: '#oil-free' },
-        { name: 'Ductable Split AC', href: '#refrigerated-dryers' },
-        { name: 'High Wall Split AC', href: '#desiccant-dryers' },
-        { name: 'Cassette Split AC', href: '#filtration' },
-        { name: 'Floor Standing AC', href: '#filtration' },
+        { name: 'VRV X', href: '#vrv-x' },
+        { name: 'VRV Home Series', href: '#vrv-home' },
+        { name: 'VRVX III Water Cooled', href: '#water-cooled' },
+        { name: 'Ductable Split AC', href: '#ductable' },
+        { name: 'High Wall Split AC', href: '#high-wall' },
+        { name: 'Cassette Split AC', href: '#cassette' },
+        { name: 'Floor Standing AC', href: '#floor-standing' },
       ]
     },
     { 
       name: 'Industries', 
-      href: 'industries',
+      href: '/industries',
       hasDropdown: true,
       dropdownItems: [
         { name: 'Automotive', href: '#automotive' },
@@ -42,10 +40,9 @@ export function Navbar() {
     },
     { 
       name: 'Discover Us', 
-      href: 'discoverus',
+      href: '/discover',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About Us', href: '#about' },
         { name: 'Our History', href: '#history' },
         { name: 'Why Choose Us', href: '#why-choose' },
         { name: 'Our Team', href: '#team' },
@@ -55,7 +52,7 @@ export function Navbar() {
     },
     { 
       name: 'Career', 
-      href: 'career',
+      href: '/career',
       hasDropdown: true,
       dropdownItems: [
         { name: 'Current Openings', href: '#openings' },
@@ -64,46 +61,54 @@ export function Navbar() {
         { name: 'Apply Now', href: '#apply' },
       ]
     },
-    { 
-      name: 'Contact Us', 
-      href: 'contactus',
-    },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            {/* <a href="#home" className="text-blue-600"> */}
-              <img src={Logo} alt="Logo" className="h-16 w-auto" />
-            {/* </a> */}
+    <nav className="bg-white shadow-md sticky top-0 z-50 w-full">
+      {/* UX Rationale: max-w-[95%] reduces the large white side-gutters. 
+          px-2 ensures content doesn't touch the very edge on mobile. 
+      */}
+      <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 sm:px-4 lg:px-10">
+        <div className="flex justify-between items-center h-20">
+          
+          {/* Logo Section */}
+          <div className="flex-shrink-0 flex items-center">
+            <a href="/">
+              <img 
+                src={Logo} 
+                alt="Vakharia Airtech Logo" 
+                className="h-12 md:h-14 lg:h-16 w-auto object-contain transition-all" 
+              />
+            </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-16">
+          {/* Desktop Navigation Section 
+              - flex-1 and justify-center centers the links.
+              - gap-x-4 to gap-x-8 ensures equal spacing that scales.
+          */}
+          <div className="hidden md:flex flex-1 justify-center items-center gap-x-4 lg:gap-x-10 xl:gap-x-20">
             {navLinks.map((link) => (
               link.hasDropdown ? (
                 <div
                   key={link.name}
-                  className="relative"
+                  className="relative group py-2"
                   onMouseEnter={() => setOpenDropdown(link.name)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  <button className="text-black md:text-lg text-base hover:text-blue-600 transition-colors duration-200 flex items-center gap-1">
+                  <button className="text-gray-800 text-sm lg:text-[15px] xl:text-lg font-semibold hover:text-blue-700 transition-colors duration-200 flex items-center gap-1 whitespace-nowrap">
                     {link.name}
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* Dropdown Menu */}
+                  {/* Dropdown Menu - Centered logic */}
                   {openDropdown === link.name && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-md shadow-xl border border-gray-100 py-3 animate-in fade-in slide-in-from-top-2">
                       {link.dropdownItems?.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
-                          className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
+                          className="block px-6 py-2.5 text-sm text-gray-600 hover:text-blue-700 hover:bg-blue-50 transition-colors duration-200"
                         >
                           {item.name}
                         </a>
@@ -115,60 +120,58 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-black md:text-lg text-base hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-800 text-sm lg:text-[15px] xl:text-base font-semibold hover:text-blue-700 transition-colors duration-200 whitespace-nowrap py-2"
                 >
                   {link.name}
                 </a>
               )
             ))}
-            {/* CTA Button - Desktop */}
-            <div className="hidden md:block">
-             <button className="w-full text-black px-6 py-2 rounded-lg transition-colors duration-200 mt-2 flex items-center justify-center">
-               <Search className="w-6 h-6 hover:text-blue-600" />
-             </button>
-            </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-2 lg:gap-4">
+            <button 
+                className="p-2 text-gray-700 hover:text-blue-700 transition-colors"
+                aria-label="Search technical products"
+            >
+              <Search className="w-5 h-5 lg:w-6 lg:h-6" />
+            </button>
+            
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
-              aria-label="Toggle menu"
+              className="md:hidden p-2 text-gray-800 hover:text-blue-700 transition-colors"
+              aria-label="Toggle mobile menu"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Drawer */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-4 pt-2 pb-4 space-y-2">
+        <div className="md:hidden bg-white border-t border-gray-100 shadow-inner max-h-[85vh] overflow-y-auto">
+          <div className="px-4 py-6 space-y-1">
             {navLinks.map((link) => (
               link.hasDropdown ? (
-                <div key={link.name}>
+                <div key={link.name} className="border-b border-gray-50 last:border-none">
                   <button
                     onClick={() => setMobileOpenDropdown(mobileOpenDropdown === link.name ? null : link.name)}
-                    className="w-full flex items-center justify-between px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                    className="w-full flex items-center justify-between py-3 text-gray-800 font-medium"
                   >
                     {link.name}
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileOpenDropdown === link.name ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileOpenDropdown === link.name ? 'rotate-180 text-blue-700' : ''}`} />
                   </button>
                   
-                  {/* Mobile Dropdown */}
                   {mobileOpenDropdown === link.name && (
-                    <div className="pl-4 mt-1 space-y-1">
+                    <div className="pl-4 pb-3 space-y-1">
                       {link.dropdownItems?.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
-                          className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200"
-                          onClick={() => {
-                            setIsMenuOpen(false);
-                            setMobileOpenDropdown(null);
-                          }}
+                          className="block py-2.5 text-sm text-gray-600 active:text-blue-700"
+                          onClick={() => setIsMenuOpen(false)}
                         >
                           {item.name}
                         </a>
@@ -180,14 +183,13 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                  className="block py-4 text-gray-800 font-medium border-b border-gray-50 last:border-none"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </a>
               )
             ))}
-            
           </div>
         </div>
       )}

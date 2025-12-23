@@ -1,3 +1,3 @@
-export { Button, buttonVariants } from './Button';
-export { Card, CardHeader, CardTitle, CardContent, CardDescription } from './Card';
-export { cn } from './Utils';
+export { Button } from './button';
+export { Card, CardHeader, CardTitle, CardContent, CardDescription } from './card';
+export { cn } from './utils';

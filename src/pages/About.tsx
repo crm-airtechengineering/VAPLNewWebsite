@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from './ui';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui';
 import { Target, Users, Award } from 'lucide-react';
 
 export function About() {

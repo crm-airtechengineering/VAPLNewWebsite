@@ -25,7 +25,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
             {icon}
           </div>
         </div>
-        
         <h3 className="mb-3 text-xl font-bold text-[#4A3F35]">{title}</h3>
         
         <p className="text-gray-600 text-base leading-relaxed">
@@ -40,8 +39,8 @@ export const WhyChooseSection: React.FC = () => {
   const features = [
     {
       icon: <Settings size={28} />,
-      title: 'Customized Tailored Solutions',
-      description: 'Unique custom solutions to meet the unique process requirements of each facility, ensuring optimal performance, energy efficiency, and reliability in any industrial environment.'
+      title: 'Precision-Engineered Systems',
+      description: 'We design unique air pollution control and ventilation solutions tailored to the specific process requirements of your facility, ensuring optimal performance and energy efficiency.'
     },
     {
       icon: <Award size={28} />,

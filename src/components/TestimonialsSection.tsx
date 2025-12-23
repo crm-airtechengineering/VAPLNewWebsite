@@ -109,10 +109,6 @@ export const TestimonialsSection: React.FC = () => {
       {/* Header */}
       <div
         className="py-12 px-4 md:px-8 text-center rounded-b-3xl"
-        // style={{
-        //   background:
-        //     "linear-gradient(180deg,#d6fbff 0%, #eaf9ff 50%, rgba(255,255,255,0.7) 100%)",
-        // }}
       >
         <h2 className="text-3xl md:text-4xl font-bold text-[#4A3F35]">
           What Our Clients Say
@@ -123,7 +119,7 @@ export const TestimonialsSection: React.FC = () => {
       </div>
 
       {/* Carousel */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mt-10 relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-14 mt-10 relative">
 
         {/* LEFT ARROW */}
         {index > 0 && (
