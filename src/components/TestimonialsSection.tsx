@@ -109,10 +109,10 @@ export const TestimonialsSection: React.FC = () => {
       {/* Header */}
       <div
         className="py-12 px-4 md:px-8 text-center rounded-b-3xl"
-        style={{
-          background:
-            "linear-gradient(180deg,#d6fbff 0%, #eaf9ff 50%, rgba(255,255,255,0.7) 100%)",
-        }}
+        // style={{
+        //   background:
+        //     "linear-gradient(180deg,#d6fbff 0%, #eaf9ff 50%, rgba(255,255,255,0.7) 100%)",
+        // }}
       >
         <h2 className="text-3xl md:text-4xl font-bold text-[#4A3F35]">
           What Our Clients Say
@@ -175,14 +175,14 @@ export const TestimonialsSection: React.FC = () => {
           {visible.map((t) => (
             <article
               key={t.id}
-              className="relative bg-white rounded-xl border border-teal-200 shadow-sm px-6 py-8 md:px-8 md:py-10 min-h-[260px] w-full max-w-[420px]"
+              className="relative bg-white rounded-xl border border-[#F4A261] shadow-sm px-6 py-8 md:px-8 md:py-10 min-h-[260px] w-full max-w-[420px]"
             >
               {/* Quote icon */}
               <div className="absolute -left-4 -top-4">
-                <div className="bg-teal-50 rounded-full p-2 border border-teal-100">
+                <div className="bg-[#F4A261] rounded-full p-2 border border-[#F4A261]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 text-teal-500"
+                    className="w-5 h-5 text-[#8B4513]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -208,7 +208,7 @@ export const TestimonialsSection: React.FC = () => {
                   <svg
                     key={i}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4 text-yellow-400"
+                    className="w-4 h-4 text-[#F4A261]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
