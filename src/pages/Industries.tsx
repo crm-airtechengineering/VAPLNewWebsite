@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from './ui';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui';
 import { 
   Building2, 
   ShoppingBag, 

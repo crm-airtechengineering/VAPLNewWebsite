@@ -41,6 +41,14 @@ const BuildingTrustSection: React.FC = () => {
     },
   ];
 
+  // Helper to resolve the correct path for Vite
+  const getIconPath = (iconName: string) => {
+    const base = import.meta.env.BASE_URL;
+    // Cleans up the path to ensure no double slashes //
+    const cleanBase = base.endsWith('/') ? base : `${base}/`;
+    return `${cleanBase}icons/${iconName}`;
+  };
+
   return (
     <section 
       className="w-full py-20 " 
@@ -66,9 +74,13 @@ const BuildingTrustSection: React.FC = () => {
               {/* Icon Container */}
               <div className="w-20 h-20 bg-[#f8be4c] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 duration-300">
                 <img
-                  src={`${import.meta.env.BASE_URL}icons/${stat.icon}`}
+                  src={getIconPath(stat.icon)}
                   className="w-10 h-10 object-contain"
                   alt={stat.alt}
+                  onError={(e) => {
+                    // This helps debug if the path is still wrong
+                    console.error(`Failed to load icon: ${stat.icon}`);
+                  }}
                 />
               </div>
 

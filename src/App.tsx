@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { VideoHero } from './components/VideoHero';
-import { WhyChooseSection } from './components/WhyChooseSection';
-import { IndustriesSection } from './components/IndustriesSection';
-import { HistorySection } from './components/HistorySection';
-import { TestimonialsSection } from './components/TestimonialsSection';
 import { PageLoader } from './components/PageLoader';
-import BuildingTrustSection from './components/BuildingTrustSection';
+
+// Import your page components
+import { Home } from './pages/Home';
+import { About } from './pages/About'; // Ensure this is exported from your About page
+import { Contact } from './pages/ContactUs';
+import Solutions from './pages/Solutions';
+import { Industries } from './pages/Industries';
+import DiscoverUs from './pages/DiscoverUs';
+
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate initial page loading; you can adjust the timeout as needed
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1900);
@@ -22,30 +25,31 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 relative">
-      {isLoading && <PageLoader />}
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex flex-col relative">
+        {/* Loader Overlay */}
+        {isLoading && <PageLoader />}
 
-      <Navbar />
-      
-      {/* Video Hero Section */}
-      <VideoHero />
- 
-      {/* second Section */}
-      <BuildingTrustSection/>
+        {/* Navbar stays here - it will show on all pages */}
+        <Navbar />
 
-      {/* Why Choose Us Section */}
-      <WhyChooseSection />
+        {/* Routing Logic */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/industries" element={<Industries/>} />
+            <Route path="/discover" element={<DiscoverUs/>} />
+            
 
-      {/* Industries Section */}
-      <IndustriesSection />
+          </Routes>
+        </main>
 
-      {/* History Section */}
-      <HistorySection />
-
-     <TestimonialsSection/>
-
-      <Footer />
-    </div>
-    
+        {/* Footer stays here - it will show on all pages */}
+        <Footer />
+      </div>
+    </Router>
   );
 }
