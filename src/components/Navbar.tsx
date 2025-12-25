@@ -8,7 +8,6 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
 
-  // Updated href to 'to' and provided specific paths for internal pages
   const navLinks = [
     { name: 'Home', to: '/' },
     { name: 'About Us', to: '/about' }, 
@@ -55,9 +54,9 @@ export function Navbar() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Current Openings', to: '/career#openings' },
-        { name: 'Life at Vakharia', to: '/career#life' },
+        { name: 'Life at Vakharia', to: '/career#life-at-vakharia' },
         { name: 'Benefits', to: '/career#benefits' },
-        { name: 'Apply Now', to: '/career#apply' },
+        { name: 'Apply Now', to: '/career#apply-now' },
       ]
     },
     { name: 'Contact Us', to: '/contact' },
