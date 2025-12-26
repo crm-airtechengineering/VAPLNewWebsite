@@ -1,7 +1,14 @@
-//import React from 'react';
+import React from 'react';
 
-const Solutions = () => {
-  const solutionData = [
+interface Solution {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+}
+
+const Solutions: React.FC = () => {
+  const solutionData: Solution[] = [
     {
       id: "cleanroom",
       title: "Clean and Controlled Rooms",
@@ -35,11 +42,10 @@ const Solutions = () => {
   ];
 
   return (
-    /* Removed pt-20 from here to eliminate the gap */
     <div className="bg-gray-50 min-h-screen">
       
-      {/* Hero Section: Added pt-20 here to protect content from overlapping with Sticky Navbar */}
-      <section className="bg-[#1a2c6d] pt-24 pb-16 text-white text-center">
+      {/* Hero Section: pt-32 ensures content starts below the Navbar */}
+      <section className="bg-[#1a2c6d] pt-32 pb-16 text-white text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Engineering Precision Environments</h1>
         <p className="text-blue-100 max-w-3xl mx-auto text-lg px-6">
           Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
@@ -49,11 +55,13 @@ const Solutions = () => {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="space-y-12">
           {solutionData.map((solution) => (
+            /* The id here now reacts to the scroll-padding-top in index.css */
             <section 
               key={solution.id} 
               id={solution.id} 
-              className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row scroll-mt-24 transition-all hover:shadow-xl hover:border-blue-200"
+              className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row transition-all hover:shadow-xl hover:border-blue-200"
             >
+              {/* Left Design Stripe */}
               <div className="w-full md:w-3 bg-[#f8be4c] transition-all group-hover:w-5"></div>
               
               <div className="p-8 md:p-12 flex-1">
@@ -77,9 +85,9 @@ const Solutions = () => {
                   ))}
                 </div>
 
-                <button className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors">
+                <button className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn">
                   Enquire about this solution
-                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'; // Import Link
 import { Linkedin, Instagram, Facebook, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import Logo from '../assets/Vakharia-Airtech-Logo.png';
@@ -171,9 +172,11 @@ export function Footer() {
             </div>
 
             {/* Connect Button */}
-            <Button className="bg-[#E53935] hover:bg-[#C62828] text-white w-full">
-              Connect with Us
-            </Button>
+            <Link to="/contact"> 
+              <Button className="bg-[#E53935] hover:bg-[#C62828] text-white w-full">
+                Connect with Us
+              </Button>
+            </Link>
           </div>
         </div>
 

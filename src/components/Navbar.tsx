@@ -73,7 +73,7 @@ export function Navbar() {
               <img 
                 src={Logo} 
                 alt="Vakharia Airtech Logo" 
-                className="h-12 md:h-14 lg:h-16 w-auto object-contain transition-all" 
+                className="h-12 md:h-18 lg:h-20 w-auto object-contain transition-all" 
               />
             </Link>
           </div>

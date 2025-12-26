@@ -54,25 +54,25 @@ export const IndustriesSection: React.FC = () => {
       title: 'Food Industries',
       description: 'Precision-engineered climate control for food processing and storage, ensuring strict adherence to hygiene standards and preserving product freshness.',
       imageUrl: foodImage,
-      buttonText: 'Case Study'
+      buttonText: 'Learn More'
     },
     {
       title: 'Residential Buildings',
       description: 'Advanced HVAC solutions for luxury apartments and residential complexes, focusing on silent operation, energy efficiency, and smart air purification.',
       imageUrl: buildingImage,
-      buttonText: 'Case Study'
+      buttonText: 'Learn More'
     },
     {
       title: 'Data Centers & Servers',
       description: 'Mission-critical precision cooling designed for 24/7 reliability, preventing equipment overheating and optimizing Power Usage Effectiveness (PUE).',
       imageUrl: datacentreImage,
-      buttonText: 'Case Study'
+      buttonText: 'Learn More'
     },
     {
       title: 'Showrooms',
       description: 'Elegant climate solutions for high-end retail and showrooms that prioritize aesthetic integration while maintaining a comfortable experience for customers.',
       imageUrl: showroomImage,
-      buttonText: 'Case Study'
+      buttonText: 'Learn More'
     },
     {
       title: 'Warehouses',

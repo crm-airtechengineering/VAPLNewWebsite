@@ -8,7 +8,7 @@ const DiscoverUs = () => {
     <div className="bg-gray-50 min-h-screen w-full">
       
       {/* Hero Section */}
-      <section className="w-full bg-[#1a2c6d] pt-24 pb-12 text-white text-center">
+      <section className="w-full bg-[#CA9584] pt-24 pb-12 text-black text-center">
         <div className="max-w-7xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover Vakharia Airtech</h1>
           <p className="text-blue-100 max-w-3xl mx-auto text-lg px-6 leading-relaxed">

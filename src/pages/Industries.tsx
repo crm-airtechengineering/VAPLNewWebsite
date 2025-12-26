@@ -1,10 +1,15 @@
-import { 
-  Building2, 
-  ShoppingBag, 
-  Stethoscope, 
-  GraduationCap, 
-  Landmark, 
-  Factory,
+import RealEstateImage from '../assets/real-estate.jpg';
+import RetailECommerceImage from '../assets/retail1.jpg'
+import EducationImage from '../assets/Education.jpg'
+import BankingImage from '../assets/Banking.jpg'
+import ManufacturingImage from '../assets/manufacturing.jpg'
+import HealthcareImage from '../assets/healthcare.jpg'
+import {  
+  //ShoppingBag, 
+ // Stethoscope, 
+  //GraduationCap, 
+  //Landmark, 
+  //Factory,
   ChevronRight
 } from 'lucide-react';
 
@@ -12,7 +17,7 @@ export function Industries() {
   const industries = [
     {
       id: 'real-estate',
-      icon: Building2,
+      image: RealEstateImage, // Local image import
       name: 'Real Estate',
       description: 'Innovative HVAC and climate control solutions for luxury residential complexes, commercial towers, and smart townships. We focus on energy efficiency and seamless integration with building management systems.',
       stats: '500+ Projects Completed',
@@ -20,7 +25,7 @@ export function Industries() {
     },
     {
       id: 'retail-ecommerce',
-      icon: ShoppingBag,
+      image: RetailECommerceImage, // Local image import
       name: 'Retail & E-commerce',
       description: 'Creating comfortable shopping experiences through precise temperature control. We provide specialized ventilation for large warehouses and high-traffic retail outlets to ensure product longevity and customer comfort.',
       stats: '200+ Retail Hubs',
@@ -28,7 +33,7 @@ export function Industries() {
     },
     {
       id: 'healthcare',
-      icon: Stethoscope,
+      image: HealthcareImage,
       name: 'Healthcare',
       description: 'Critical air filtration and contamination control for hospitals and laboratories. Our systems adhere to strict medical standards, ensuring sterile environments for operating theaters and patient wards.',
       stats: '50+ Hospitals Served',
@@ -36,7 +41,7 @@ export function Industries() {
     },
     {
       id: 'education',
-      icon: GraduationCap,
+      image: EducationImage, // Local image import
       name: 'Education',
       description: 'Optimizing learning environments with quiet, efficient air conditioning and fresh air systems. We help schools and universities maintain healthy indoor air quality to improve student focus.',
       stats: '100+ Institutions',
@@ -44,7 +49,7 @@ export function Industries() {
     },
     {
       id: 'finance-banking',
-      icon: Landmark,
+      image: BankingImage,
       name: 'Finance & Banking',
       description: 'Reliable climate control for data centers and banking hubs. We ensure your servers and critical financial infrastructure remain at optimal temperatures to prevent downtime.',
       stats: '75+ Banking Hubs',
@@ -52,7 +57,7 @@ export function Industries() {
     },
     {
       id: 'manufacturing',
-      icon: Factory,
+      image: ManufacturingImage,
       name: 'Manufacturing',
       description: 'Heavy-duty industrial air solutions for factories and assembly lines. We specialize in heat extraction, dust collection, and process cooling for large-scale manufacturing units.',
       stats: '150+ Industrial Facilities',
@@ -75,8 +80,7 @@ export function Industries() {
 
       {/* --- DETAILED SECTIONS --- */}
       {industries.map((industry, index) => {
-        const Icon = industry.icon;
-        // Alternate background colors and layout direction
+        // Fix: Use industry.icon only if it exists
         const isEven = index % 2 === 0;
 
         return (
@@ -90,9 +94,21 @@ export function Industries() {
                 
                 {/* Visual Side */}
                 <div className="flex-1 w-full">
-                  <div className={`aspect-video rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl ${isEven ? 'bg-blue-600' : 'bg-[#f8be4c]'}`}>
-                    <Icon className="w-32 h-32 text-white/20 absolute transform -rotate-12 -right-4" />
-                    <Icon className="w-24 h-24 text-white relative z-10" />
+                  <div className={`aspect-video rounded-3xl relative overflow-hidden shadow-2xl flex items-center justify-center ${isEven ? 'bg-blue-600' : 'bg-[#f8be4c]'}`}>
+                    
+                    {/* CONDITIONAL RENDERING: Image vs Icon */}
+                    {industry.image ? (
+                      <img 
+                        src={industry.image} 
+                        alt={industry.name} 
+                        className="w-full h-full object-cover" 
+                      />
+                    ) : (
+                      <>
+                      
+                        
+                      </>
+                    )}
                   </div>
                 </div>
 
