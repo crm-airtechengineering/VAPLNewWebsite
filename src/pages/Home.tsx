@@ -1,4 +1,5 @@
 import { VideoHero } from "../components/VideoHero"
+import { LogoMarquee } from "../components/LogoMarquee"; // Import the new marquee
 import { WhyChooseSection } from '../components/WhyChooseSection';
 import { IndustriesSection } from '../components/IndustriesSection';
 import { HistorySection } from '../components/HistorySection';
@@ -7,12 +8,14 @@ import BuildingTrustSection from '../components/BuildingTrustSection';
 
 export function Home() {
   return (
-    // Removed <Router> from here
     <div id="home" className="min-h-screen bg-gray-50 flex flex-col relative">
-        {/* Video Hero Section */}
+        {/* Hero Section */}
         <VideoHero />
         
-        {/* second Section */}
+        {/* Marquee Section as shown in the video */}
+        <LogoMarquee />
+
+        {/* Building Trust Section */}
         <BuildingTrustSection/>
 
         {/* Why Choose Us Section */}
@@ -26,6 +29,5 @@ export function Home() {
 
         <TestimonialsSection/>
     </div>
-    // Removed </Router> from here
   );
 }

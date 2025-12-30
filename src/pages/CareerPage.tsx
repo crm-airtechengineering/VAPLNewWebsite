@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, MapPin, X, Clock, Briefcase, FileText } from 'lucide-react';
+import { Plus, MapPin, X, Clock, Briefcase, FileText, Heart, Zap, Award, Globe } from 'lucide-react';
 import careerHero from '../assets/career.jpg'
 import teamBanner from '../assets/team.jpg'
 
@@ -106,6 +106,7 @@ const CareerPage: React.FC = () => {
       if (response.ok) {
         setStatus('✅ Application sent successfully!');
         setFormData({ fullName: '', email: '', position: 'Select Position', message: '', resume: null });
+        setTimeout(() => { setShowApplyModal(false); setStatus(''); }, 3000);
       } else {
         setStatus('❌ Failed to send application.');
       }
@@ -117,21 +118,20 @@ const CareerPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen w-full font-sans text-slate-900">
 
-      {/* HERO SECTION */}
-      <section className="relative w-full h-[50vh] min-h-[500px] overflow-hidden">
+      {/* --- HERO SECTION --- */}
+      <section className="relative w-full h-[60vh] min-h-[550px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${careerHero})` }}
         />
-        <div className="absolute inset-0 bg-[#1a2c6d]/70" />
+        <div className="absolute inset-0 bg-[#1a2c6d]/75" />
         <div className="relative z-10 max-w-7xl mx-auto h-full px-6 flex items-center">
           <div className="text-center lg:text-left max-w-3xl">
-            <h1 className="text-4xl md:text-2xl lg:text-4xl font-extrabold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
               Build the Future of <br />
               <span className="text-[#f8be4c]">Air Technology.</span>
             </h1>
-
-            <p className="text-blue-100 text-base md:text-lg leading-relaxed">
+            <p className="text-blue-100 text-lg md:text-xl leading-relaxed max-w-2xl">
               Join Vakharia Airtech and work on world-class HVAC and industrial
               engineering projects that make a real impact.
             </p>
@@ -139,8 +139,8 @@ const CareerPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CURRENT OPENINGS */}
-      <section id="openings" className="py-12 bg-[#f8faff] scroll-mt-28">
+      {/* --- CURRENT OPENINGS SECTION --- */}
+      <section id="openings" className="py-24 bg-[#f8faff] scroll-mt-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-10 border-l-4 border-[#1a2c6d] pl-6">
             <h2 className="text-4xl font-bold text-[#1f1f1f]">Current Openings</h2>
@@ -179,20 +179,81 @@ const CareerPage: React.FC = () => {
         </div>
       </section>
 
-      {/* JOB DETAIL MODAL */}
+      {/* --- LIFE AT VAKHARIA SECTION --- */}
+      <section id="life-at-vakharia" className="py-24 bg-white scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="mb-6 border-l-4 border-[#1a2c6d] pl-6">
+                <h2 className="text-4xl font-bold text-[#1f1f1f]">Life at Vakharia</h2>
+              </div>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                We believe that engineering excellence is driven by a culture of collaboration and constant learning. 
+                At Vakharia Airtech, you're not just an employee; you're a vital part of an innovative team 
+                shaping the future of industrial air technology.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 bg-[#f8faff] rounded-2xl border border-gray-100">
+                  <h4 className="font-bold text-[#1a2c6d] mb-2">Collaborative Environment</h4>
+                  <p className="text-sm text-gray-500">Work across departments to solve complex engineering challenges.</p>
+                </div>
+                <div className="p-6 bg-[#f8faff] rounded-2xl border border-gray-100">
+                  <h4 className="font-bold text-[#1a2c6d] mb-2">Innovation First</h4>
+                  <p className="text-sm text-gray-500">Access to world-class tools and the latest HVAC technologies.</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="rounded-[3rem] overflow-hidden shadow-2xl">
+                <img src={teamBanner} alt="Team" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#f8be4c]/20 rounded-full -z-10"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- BENEFITS SECTION --- */}
+      <section id="benefits" className="py-24 bg-[#1a2c6d] text-white scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-4">Employee Benefits</h2>
+          <div className="w-24 h-1 bg-[#f8be4c] mx-auto mb-8"></div>
+          <p className="text-blue-100 max-w-2xl mx-auto mb-16">
+            We are committed to providing a supportive environment that rewards hard work and encourages personal growth.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: <Heart size={28}/>, title: "Healthcare", desc: "Comprehensive medical insurance plans for you and your family." },
+              { icon: <Zap size={28}/>, title: "Growth", desc: "Paid certifications and clear pathways for internal career advancement." },
+              { icon: <Award size={28}/>, title: "Recognition", desc: "Performance-based bonuses and awards for engineering excellence." },
+              { icon: <Globe size={28}/>, title: "Work-Life", desc: "Flexible timing options and generous paid time off to recharge." }
+            ].map((benefit, i) => (
+              <div key={i} className="bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-left group">
+                <div className="text-[#f8be4c] mb-6 group-hover:scale-110 transition-transform duration-300">{benefit.icon}</div>
+                <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
+                <p className="text-blue-100/70 text-sm leading-relaxed">{benefit.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
+
+      {/* --- JOB DETAIL MODAL --- */}
       {selectedJob && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-[2rem] overflow-hidden relative shadow-2xl flex flex-col">
             <button onClick={() => setSelectedJob(null)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 z-20">
               <X size={24} className="text-gray-400" />
             </button>
-
             <div className="overflow-y-auto p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-12">
                 <div className="flex-1">
                   <h2 className="text-4xl font-bold text-gray-900 mb-4">{selectedJob.role}</h2>
                   <p className="text-gray-600 mb-10 leading-relaxed">{selectedJob.description}</p>
-
+                  
                   <h4 className="text-xl font-bold text-gray-900 mb-4">Key Responsibilities</h4>
                   <ul className="space-y-3 mb-8">
                     {selectedJob.responsibilities.map((r, i) => (
@@ -214,7 +275,7 @@ const CareerPage: React.FC = () => {
                     <div className="flex items-center gap-3 text-gray-700 font-semibold"><Clock size={20} className="text-blue-600"/> {selectedJob.time}</div>
                     <div className="flex items-center gap-3 text-gray-700 font-semibold"><MapPin size={20} className="text-blue-600"/> {selectedJob.loc}</div>
                   </div>
-
+                  
                   <button 
                     onClick={() => { setSelectedJob(null); setShowApplyModal(true); }}
                     className="flex items-center gap-4 group w-full outline-none bg-[#1a2c6d] hover:bg-[#f8be4c] p-1.5 pr-6 rounded-2xl transition-all duration-300"
@@ -233,9 +294,9 @@ const CareerPage: React.FC = () => {
         </div>
       )}
 
-      {/* APPLY NOW POPUP MODAL */}
+      {/* --- APPLY NOW POPUP MODAL --- */}
       {showApplyModal && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-[#121212] w-full max-w-lg p-10 rounded-[3rem] shadow-2xl relative">
             <button onClick={() => setShowApplyModal(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-800">
               <X size={24} className="text-gray-400" />
@@ -244,114 +305,45 @@ const CareerPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-white mb-2 text-center">Apply Now</h2>
 
             <form onSubmit={handleSubmit} className="space-y-3 mt-5">
-              <input
-                type="text"
-                name="fullName"
-                placeholder="Full Name"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm"
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm"
-              />
-
-              <select
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
-                required
-                className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm"
-              >
+              <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm" />
+              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm" />
+              <select name="position" value={formData.position} onChange={handleChange} required className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm">
                 <option className="text-black" value="Select Position" disabled>Select Position</option>
-                {jobs.map((job, i) => (
-                  <option key={i} className="text-black" value={job.role}>{job.role}</option>
-                ))}
+                {jobs.map((job, i) => <option key={i} className="text-black" value={job.role}>{job.role}</option>)}
               </select>
-
               <div className="relative flex items-center bg-white/5 border border-dashed border-white/20 rounded-xl p-4 hover:border-[#f8be4c] transition-colors cursor-pointer group">
                 <FileText className="text-gray-500 mr-3 group-hover:text-[#f8be4c]" size={20} />
-                <input
-                  type="file"
-                  name="resume"
-                  accept=".pdf"
-                  onChange={handleChange}
-                  required
-                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                />
-                <span className="text-sm text-gray-400">
-                  {formData.resume ? formData.resume.name : "Upload Resume (PDF)"}
-                </span>
+                <input type="file" name="resume" accept=".pdf" onChange={handleChange} required className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+                <span className="text-sm text-gray-400">{formData.resume ? formData.resume.name : "Upload Resume (PDF)"}</span>
               </div>
-
-              <textarea
-                name="message"
-                rows={3}
-                placeholder="Experience Summary..."
-                value={formData.message}
-                onChange={handleChange}
-                required
-                className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm"
-              ></textarea>
-
-              <button
-                type="submit"
-                className="w-full bg-[#f8be4c] text-[#1a2c6d] font-black py-5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all text-base"
-              >
+              <textarea name="message" rows={3} placeholder="Experience Summary..." value={formData.message} onChange={handleChange} required className="w-full p-4 rounded-xl bg-white/10 text-white border border-white/20 focus:border-[#f8be4c] outline-none text-sm"></textarea>
+              <button type="submit" className="w-full bg-[#f8be4c] text-[#1a2c6d] font-black py-5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all text-base">
                 {status === 'Sending...' ? 'Processing...' : 'Submit Application'}
               </button>
-
-              {status && (
-                <p className="text-center text-sm text-white mt-4 font-bold">{status}</p>
-              )}
+              {status && <p className="text-center text-sm text-white mt-4 font-bold">{status}</p>}
             </form>
           </div>
         </div>
       )}
-      {/* JOIN OUR TEAM SECTION */}
-<section className="py-16 px-6">
-  <div
-    className="max-w-full mx-auto rounded-[2.5rem] overflow-hidden relative flex flex-col lg:flex-row items-center p-10 lg:p-16"
-    style={{ backgroundColor: "#f4b6a5" }} /* light peach */
-  >
-    {/* LEFT TEXT BLOCK */}
-    <div className="flex-1 relative z-10">
-      <h2 className="text-4xl font-bold text-[#1f1f1f] mb-4">
-        Join our innovative team
-      </h2>
-      <p className="text-gray-700 max-w-lg leading-relaxed mb-8">
-        If you are unable to find a suitable opening, please do not worry.
-        We are always up to discover new talents. Kindly mail us your resume and 
-        portfolio link — we would love to connect with you.
-      </p>
-      <a 
-        href="/contact" 
-        className="inline-block bg-blue-600 text-white font-bold px-10 py-4 rounded-xl hover:scale-105 transition-transform"
-        >
-        Contact Now
-          </a>
-    </div>
 
-    {/* RIGHT IMAGE */}
-    <div className="flex-1 mt-10 lg:mt-0 relative">
-      <img
-        src={teamBanner}
-        alt="Team"
-        className="w-full object-cover opacity-60"
-      />
-    </div>
-
-  </div>
-</section>
-
+      {/* --- JOIN OUR TEAM CTA --- */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden relative flex flex-col lg:flex-row items-center p-10 lg:p-16" style={{ backgroundColor: "#f4b6a5" }}>
+          <div className="flex-1 relative z-10">
+            <h2 className="text-4xl font-bold text-[#1f1f1f] mb-4">Join our innovative team</h2>
+            <p className="text-gray-700 max-w-lg leading-relaxed mb-8">
+              If you are unable to find a suitable opening, please do not worry. 
+              We are always looking for new talents. Kindly mail us your resume.
+            </p>
+            <a href="/contact" className="inline-block bg-blue-600 text-white font-bold px-10 py-4 rounded-xl hover:scale-105 transition-transform">
+              Contact Now
+            </a>
+          </div>
+          <div className="flex-1 mt-10 lg:mt-0 relative">
+            <img src={teamBanner} alt="Team" className="w-full object-cover opacity-60 rounded-2xl" />
+          </div>
+        </div>
+      </section>
 
     </div>
   );

@@ -93,7 +93,7 @@ export const IndustriesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold">
-            Delivering Excellence Through Expertise
+            Industries We Serve
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto md:text-lg ">
             Customized HVAC systems built to address the unique needs of various industries through advanced engineering and proven performance.
