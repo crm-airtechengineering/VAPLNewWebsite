@@ -36,29 +36,29 @@ export function Navbar() {
         { name: 'Manufacturing', to: '/industries#manufacturing' },
       ]
     },
-    { 
-      name: 'Discover Us', 
-      to: '/discover',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Our History', to: '/discover#history' },
-        { name: 'Why Choose Us', to: '/discover#why-choose' },
-        { name: 'Our Team', to: '/discover#team' },
-        { name: 'Certifications', to: '/discover#certifications' },
-        { name: 'Testimonials', to: '/discover#testimonials' },
-      ]
-    },
-    { 
-      name: 'Career', 
-      to: '/career',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Current Openings', to: '/career#openings' },
-        { name: 'Life at Vakharia', to: '/career#life-at-vakharia' },
-        { name: 'Benefits', to: '/career#benefits' },
-        { name: 'Apply Now', to: '/career#apply-now' },
-      ]
-    },
+    // { 
+    //   name: 'Discover Us', 
+    //   to: '/discover',
+    //   hasDropdown: true,
+    //   dropdownItems: [
+    //     { name: 'Our History', to: '/discover#history' },
+    //     { name: 'Why Choose Us', to: '/discover#why-choose' },
+    //     { name: 'Our Team', to: '/discover#team' },
+    //     { name: 'Certifications', to: '/discover#certifications' },
+    //     { name: 'Testimonials', to: '/discover#testimonials' },
+    //   ]
+    // },
+    // { 
+    //   name: 'Career', 
+    //   to: '/career',
+    //   hasDropdown: true,
+    //   dropdownItems: [
+    //     { name: 'Current Openings', to: '/career#openings' },
+    //     { name: 'Life at Vakharia', to: '/career#life-at-vakharia' },
+    //     { name: 'Benefits', to: '/career#benefits' },
+    //     { name: 'Apply Now', to: '/career#apply-now' },
+    //   ]
+    // },
     { name: 'Contact Us', to: '/contact' },
   ];
 

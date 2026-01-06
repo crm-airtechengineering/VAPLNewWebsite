@@ -63,7 +63,7 @@ export function Footer() {
           </div>
                 <h3 className="text-lg text-white">Vakharia Airtech Pvt. Ltd</h3>
               </div>
-              <p className="text-base text-[#f8be4c] mb-4">Your HVAC never loses your cool</p>
+              <p className="text-base text-[#f8be4c] mb-4">We are HVAC Engineering Company</p>
             </div>
 
             <p className="text-sm mb-6 leading-relaxed">

@@ -2,7 +2,7 @@ import { VideoHero } from "../components/VideoHero"
 import { LogoMarquee } from "../components/LogoMarquee"; // Import the new marquee
 import { WhyChooseSection } from '../components/WhyChooseSection';
 import { IndustriesSection } from '../components/IndustriesSection';
-import { HistorySection } from '../components/HistorySection';
+//import { HistorySection } from '../components/HistorySection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
 import BuildingTrustSection from '../components/BuildingTrustSection';
 
@@ -25,7 +25,7 @@ export function Home() {
         <IndustriesSection />
 
         {/* History Section */}
-        <HistorySection />
+        {/* <HistorySection /> */}
 
         <TestimonialsSection/>
     </div>

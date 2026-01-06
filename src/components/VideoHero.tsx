@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import industrialVideo from '../assets/Video1.mp4';
 
 export function VideoHero() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,21 +10,19 @@ export function VideoHero() {
   const slides = [
     {
       id: 1,
-      videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      title: 'Industrial Ventilation',
-      subtitle: 'Clean air solutions for industrial environments',
+      videoUrl: industrialVideo,
+
     },
     {
       id: 2,
-      videoUrl: 'https://www.w3schools.com/html/movie.mp4',
-      title: 'Central Air Conditioning',
-      subtitle: 'Efficient climate control for large spaces',
+      videoUrl: industrialVideo,
+  
     },
     {
       id: 3,
-      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-      title: 'Gas Turbine Inlet Air Cooling',
-      subtitle: 'Advanced cooling solutions for optimal performance',
+      videoUrl: industrialVideo,
+      //title: 'Gas Turbine Inlet Air Cooling',
+      //subtitle: 'Advanced cooling solutions for optimal performance',
     },
     
     
@@ -83,7 +82,7 @@ export function VideoHero() {
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+      {/* <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
         <div className="max-w-5xl">
           <h1 className="text-white text-5xl md:text-7xl mb-4 drop-shadow-2xl">
             {slides[currentIndex].title}
@@ -92,9 +91,9 @@ export function VideoHero() {
             {slides[currentIndex].subtitle}
           </p>
         </div>
-      </div>
+      </div>  */}
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows
       <button
         onClick={goToPrevious}
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-all hover:scale-110"

@@ -54,8 +54,8 @@ export const WhyChooseSection: React.FC = () => {
     },
     {
       icon: <TrendingUp size={28} />,
-      title: 'Structured ERP-Driven Execution',
-      description: 'ERP-based project management system ensures real-time tracking, milestone optimization, strict quality control and on-time delivery at every stage.'
+      title: 'End-to-End Lifecycle Support',
+      description: 'Our commitment extends beyond installation. We provide proactive maintenance, genuine spares, and expert technical support to ensure your systems operate at peak performance for years.'
     },
     {
       icon: <Hammer size={28} />,
@@ -64,7 +64,7 @@ export const WhyChooseSection: React.FC = () => {
     },
     {
       icon: <CheckCircle size={28} />,
-      title: 'Approved by Leading Consultants',
+      title: 'Approved by Leading Consultants & Architects',
       description: 'Trusted and recommended by top MEP and HVAC consultants, architects, and engineers for quality of quality, safety, and technical compliance.'
     }
   ];

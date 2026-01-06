@@ -104,7 +104,7 @@ export const TestimonialsSection: React.FC = () => {
   );
 
   return (
-    <section id="testimonials" className="relative py-16">
+    <section id="testimonials" className="relative pb-6">
       
       {/* Header */}
       <div
