@@ -1,4 +1,5 @@
 import React from 'react';
+// 1. All your imports stay at the very top
 import abil from '../assets/clientimages/ABIL.jpg';
 import aryaomnitalk from '../assets/clientimages/Arya-Omnitalk.jpg';
 import bajajalianz from '../assets/clientimages/Bajaj-Allianz.jpg';
@@ -22,6 +23,7 @@ import talentica from '../assets/clientimages/Talentica.jpg';
 import varroc from '../assets/clientimages/Varroc.jpg'; 
 import venkys from '../assets/clientimages/Venkys.jpg'; 
 
+// 2. Define the logos array outside the component so it doesn't re-create on every render
 const logos = [
   { name: 'Abil', img: abil },
   { name: 'Arya-Omnitalk', img: aryaomnitalk },
@@ -58,15 +60,11 @@ export const LogoMarquee: React.FC = () => {
         .marquee-track {
           display: flex;
           width: max-content;
-          /* Tighter gap for a clean look */
           gap: 2rem; 
           animation: marquee 45s linear infinite;
         }
-        .marquee-container:hover .marquee-track {
-          animation-play-state: paused;
-        }
+        /* Hover pause is removed per your request */
         .marquee-fade {
-          /* Narrower fade edge (5%) ensures logos are visible for longer */
           mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
@@ -74,8 +72,7 @@ export const LogoMarquee: React.FC = () => {
 
       <div className="marquee-container marquee-fade relative flex overflow-hidden">
         <div className="marquee-track whitespace-nowrap flex items-center">
-          
-          {/* Combined logos logic to ensure exact spacing between the end of Set 1 and start of Set 2 */}
+          {/* 3. logos is now accessible here */}
           {[...logos, ...logos].map((logo, index) => (
             <div 
               key={index} 
@@ -84,7 +81,6 @@ export const LogoMarquee: React.FC = () => {
               <img 
                 src={logo.img} 
                 alt={logo.name} 
-                /* Increased height for clarity: h-24 is roughly 96px */
                 className="h-20 md:h-24 w-auto object-contain transition-transform duration-300 hover:scale-105" 
               />
             </div>

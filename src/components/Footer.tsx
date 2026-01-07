@@ -10,20 +10,17 @@ export function Footer() {
     { name: 'Leadership', href: 'leadership' },
     { name: 'Blog', href: 'blog' },
     { name: 'Apply for Job', href: 'careers' },
-    { name: 'Downloads', href: 'downloads' },
+    //{ name: 'Downloads', href: 'downloads' },
   ];
 
   const solutions = [
-    'Central Air Conditioning',
-    'Industrial Ventilation',
-    'Process Cooling',
-    'Process Heating (Heat Pump)',
-    'Gas Turbine Inlet Air Cooling',
-    'CHPC Architecture/ Trigeneration',
-    'Sustainable Dehumidification',
-    'Cleanroom Solutions',
-    'SFN for Liquid Cooled Data Centres',
-    'Heat Recovery Based Absorption Chilling',
+    'VRV and Centralized Air Conditioning',
+    'Clean and Controlled Rooms',
+    'Chillers',
+    'Cold Room and Storage Solutions',
+    'Fresh Air',
+    'Basement Ventilation',
+    'Staircase and Lift Pressurization',
   ];
 
   const socialLinks = [
@@ -67,7 +64,7 @@ export function Footer() {
             </div>
 
             <p className="text-sm mb-6 leading-relaxed">
-              With nearly 30 years of expertise and 400+ projects across India, Aqua Chill delivers 
+              With nearly 21+ years of expertise and 10,00+ projects across India, Vakharia Airtech delivers 
               turnkey HVAC and process cooling solutions that blend innovation, energy efficiency, and 
               reliability. Trusted by leading industries, we specialize in designing and executing 
               sustainable, high-performance systems that ensure quality, compliance, and long-term value.

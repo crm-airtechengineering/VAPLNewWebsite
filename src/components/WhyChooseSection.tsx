@@ -45,7 +45,7 @@ export const WhyChooseSection: React.FC = () => {
     {
       icon: <Award size={28} />,
       title: 'Domain Expertise',
-      description: 'With 37+ years in industrial HVAC, AHU, we bring deep technical knowledge and proven experience across industries, from pharmaceuticals to large-scale cooling applications.'
+      description: 'With 21+ years in industrial HVAC, AHU, we bring deep technical knowledge and proven experience across industries, from pharmaceuticals to large-scale cooling applications.'
     },
     {
       icon: <Target size={28} />,

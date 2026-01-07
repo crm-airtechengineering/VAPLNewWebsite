@@ -21,14 +21,14 @@ const BuildingTrustSection: React.FC = () => {
     {
       id: 2,
       icon: 'repeat.svg',
-      value: '65000+',
+      value: '65,000+',
       label: 'HP Delivered',
       alt: 'Repeat Orders Icon',
     },
     {
       id: 3,
       icon: 'projects.svg',
-      value: '10000+',
+      value: '10,000+',
       label: 'Projects Completed',
       alt: 'Projects Icon',
     },
