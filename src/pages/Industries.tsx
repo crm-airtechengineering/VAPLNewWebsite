@@ -1,35 +1,28 @@
-import RealEstateImage from '../assets/real-estate.jpg';
-import RetailECommerceImage from '../assets/retail1.jpg'
-import EducationImage from '../assets/Education.jpg'
-import BankingImage from '../assets/Banking.jpg'
-import ManufacturingImage from '../assets/manufacturing.jpg'
-import HealthcareImage from '../assets/healthcare.jpg'
-import {  
-  //ShoppingBag, 
- // Stethoscope, 
-  //GraduationCap, 
-  //Landmark, 
-  //Factory,
-  ChevronRight
-} from 'lucide-react';
+import HighRiseImage from '../assets/real-estate.jpg'; // Reusing your asset or replace with new one
+import BungalowImage from '../assets/retail1.jpg'; // Reusing your asset or replace with new one
+import EducationImage from '../assets/Education.jpg';
+import BankingImage from '../assets/Banking.jpg';
+import ManufacturingImage from '../assets/manufacturing.jpg';
+import HealthcareImage from '../assets/healthcare.jpg';
+import { ChevronRight } from 'lucide-react';
 
 export function Industries() {
   const industries = [
     {
-      id: 'real-estate',
-      image: RealEstateImage, // Local image import
-      name: 'Real Estate',
-      description: 'Innovative HVAC and climate control solutions for luxury residential complexes, commercial towers, and smart townships. We focus on energy efficiency and seamless integration with building management systems.',
-      stats: '500+ Projects Completed',
-      features: ['Centralized Cooling', 'Smart Automation', 'Energy Audits']
+      id: 'high-rise-buildings',
+      image: HighRiseImage,
+      name: 'High Rise Buildings',
+      description: 'Engineering high-performance HVAC systems for vertical landscapes. We specialize in staircase and lift-well pressurization, basement ventilation, and centralized cooling solutions that ensure safety and comfort for modern skyscrapers.',
+      stats: '300+ Towers Ventilated',
+      features: ['Staircase Pressurization', 'Basement Smoke Exhaust', 'Energy-Efficient VRV']
     },
     {
-      id: 'retail-ecommerce',
-      image: RetailECommerceImage, // Local image import
-      name: 'Retail & E-commerce',
-      description: 'Creating comfortable shopping experiences through precise temperature control. We provide specialized ventilation for large warehouses and high-traffic retail outlets to ensure product longevity and customer comfort.',
-      stats: '200+ Retail Hubs',
-      features: ['Warehouse Ventilation', 'Comfort Cooling', '24/7 Monitoring']
+      id: 'luxurious-bungalows',
+      image: BungalowImage,
+      name: 'Luxurious Bungalows',
+      description: 'Bespoke climate control for high-end residential estates. Our solutions focus on ultra-quiet operation, architectural aesthetics, and smart automation to provide a personalized comfort experience without compromising on interior design.',
+      stats: '150+ Premium Homes',
+      features: ['Silent VRF Systems', 'Smart App Integration', 'Aesthetic Grill Designs']
     },
     {
       id: 'healthcare',
@@ -41,7 +34,7 @@ export function Industries() {
     },
     {
       id: 'education',
-      image: EducationImage, // Local image import
+      image: EducationImage,
       name: 'Education',
       description: 'Optimizing learning environments with quiet, efficient air conditioning and fresh air systems. We help schools and universities maintain healthy indoor air quality to improve student focus.',
       stats: '100+ Institutions',
@@ -80,7 +73,6 @@ export function Industries() {
 
       {/* --- DETAILED SECTIONS --- */}
       {industries.map((industry, index) => {
-        // Fix: Use industry.icon only if it exists
         const isEven = index % 2 === 0;
 
         return (
@@ -95,19 +87,12 @@ export function Industries() {
                 {/* Visual Side */}
                 <div className="flex-1 w-full">
                   <div className={`aspect-video rounded-3xl relative overflow-hidden shadow-2xl flex items-center justify-center ${isEven ? 'bg-blue-600' : 'bg-[#f8be4c]'}`}>
-                    
-                    {/* CONDITIONAL RENDERING: Image vs Icon */}
-                    {industry.image ? (
+                    {industry.image && (
                       <img 
                         src={industry.image} 
                         alt={industry.name} 
                         className="w-full h-full object-cover" 
                       />
-                    ) : (
-                      <>
-                      
-                        
-                      </>
                     )}
                   </div>
                 </div>
@@ -116,7 +101,7 @@ export function Industries() {
                 <div className="flex-1 space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-1 bg-[#f8be4c]"></div>
-                    <span className="text-blue-600 font-bold uppercase tracking-widest text-sm">Industrial Expertise</span>
+                    <span className="text-blue-600 font-bold uppercase tracking-widest text-sm">Expert Solutions</span>
                   </div>
                   
                   <h2 className="text-4xl font-bold text-[#1a2c6d]">{industry.name}</h2>
