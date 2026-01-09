@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss(),],
-  base: '/VAPLNewWebsite/',
-  
+  // FIX: Change base to '/' for Vercel deployment
+  plugins: [react(), tailwindcss()],
+  base: '/', 
 })
