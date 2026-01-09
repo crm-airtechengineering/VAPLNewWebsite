@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion"; // 1. Import Framer Motion
 
 type Testimonial = {
   id: number;
@@ -104,21 +105,32 @@ export const TestimonialsSection: React.FC = () => {
   );
 
   return (
-    <section id="testimonials" className="relative pb-6">
+    <section id="testimonials" className="relative pb-6 overflow-hidden">
       
-      {/* Header */}
-      <div
-        className="py-12 px-4 md:px-8 text-center rounded-b-3xl"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-[#4A3F35]">
+      {/* --- Header Section with Motion Effect --- */}
+      <div className="py-12 px-4 md:px-8 text-center rounded-b-3xl">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-[#4A3F35]"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} // Continuous effect
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           What Our Clients Say
-        </h2>
-        <p className="text-base md:text-lg text-[#1F1F1F] max-w-2xl mx-auto mt-2">
+        </motion.h2>
+        
+        <motion.p 
+          className="text-base md:text-lg text-[#1F1F1F] max-w-2xl mx-auto mt-2"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} // Continuous effect
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        >
           Trusted by industry leaders across India for reliable and innovative HVAC solutions.
-        </p>
+        </motion.p>
       </div>
 
-      {/* Carousel */}
+      {/* --- Carousel Section --- */}
       <div className="max-w-7xl mx-auto px-4 md:px-14 mt-10 relative">
 
         {/* LEFT ARROW */}
@@ -126,7 +138,7 @@ export const TestimonialsSection: React.FC = () => {
           <button
             onClick={goLeft}
             aria-label="Previous testimonials"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-50"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +161,7 @@ export const TestimonialsSection: React.FC = () => {
           <button
             onClick={goRight}
             aria-label="Next testimonials"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-50"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -166,12 +178,12 @@ export const TestimonialsSection: React.FC = () => {
           </button>
         )}
 
-        {/* Cards */}
+        {/* Cards Grid */}
         <div className="flex gap-6 md:gap-8 justify-center">
           {visible.map((t) => (
             <article
               key={t.id}
-              className="relative bg-white rounded-xl border border-[#F4A261] shadow-sm px-6 py-8 md:px-8 md:py-10 min-h-[260px] w-full max-w-[420px]"
+              className="relative bg-white rounded-xl border border-[#F4A261] shadow-sm px-6 py-8 md:px-8 md:py-10 min-h-[260px] w-full max-w-[420px] transition-transform duration-300"
             >
               {/* Quote icon */}
               <div className="absolute -left-4 -top-4">
@@ -216,15 +228,15 @@ export const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Dots */}
+        {/* Pagination Dots */}
         <div className="mt-6 flex items-center justify-center gap-2">
           {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Go to page ${i + 1}`}
-              className={`w-2 h-2 rounded-full transition ${
-                i === index ? "bg-indigo-600" : "bg-gray-300"
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === index ? "bg-[#1a2c6d] scale-125" : "bg-gray-300"
               }`}
             />
           ))}

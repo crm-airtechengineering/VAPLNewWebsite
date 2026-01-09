@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     // ADD THE BASENAME HERE
-    <Router basename="/VAPLNewWebsite"> 
+    <Router basename="/"> 
       <ScrollToTop />
       
       <div className="min-h-screen bg-gray-50 flex flex-col relative">

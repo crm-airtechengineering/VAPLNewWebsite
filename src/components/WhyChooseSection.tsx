@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion'; // 1. Import motion
 import { Card, CardContent } from './ui/card';
 import { 
   Settings, 
@@ -19,14 +20,12 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
   return (
     <Card className="bg-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl cursor-default border-base">
       <CardContent className="flex flex-col items-center text-center p-8">
-        {/* Icon Container with slight pulse effect on hover */}
         <div className="w-16 h-16 rounded-full bg-[#766b68] flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[#4A3F35]">
           <div className="text-white">
             {icon}
           </div>
         </div>
         <h3 className="mb-3 text-xl font-bold text-[#4A3F35]">{title}</h3>
-        
         <p className="text-gray-600 text-base leading-relaxed">
           {description}
         </p>
@@ -37,6 +36,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
 
 export const WhyChooseSection: React.FC = () => {
   const features = [
+    // ... your features array remains the same
     {
       icon: <Settings size={28} />,
       title: 'Precision-Engineered Systems',
@@ -73,18 +73,38 @@ export const WhyChooseSection: React.FC = () => {
     <section className="py-20 bg-gradient-to-br from-green-50 via-blue-50 to-green-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header Section */}
+        {/* Header Section with Motion */}
         <div className="text-center mb-16">
-          <h2 className="text-[#4A3F35] mb-4 text-3xl md:text-5xl font-bold">
+          <motion.h2 
+            className="text-[#4A3F35] mb-4 text-3xl md:text-5xl font-bold"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }} // 2. Set to false for continuous animation
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             Why Choose Vakharia Airtech?
-          </h2>
-          <div className="w-24 h-1 bg-[#766b68] mx-auto mb-6 rounded-full"></div>
-          <p className="text-gray-700 max-w-3xl text-lg font-medium mx-auto">
+          </motion.h2>
+
+          <motion.div 
+            className="w-24 h-1 bg-[#766b68] mx-auto mb-6 rounded-full"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          ></motion.div>
+
+          <motion.p 
+            className="text-gray-700 max-w-3xl text-lg font-medium mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          >
             Discover what sets us apart as the preferred HVAC solutions provider across diverse industries.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Features Grid */}
+        {/* Features Grid - Cards remain static as per your request */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
