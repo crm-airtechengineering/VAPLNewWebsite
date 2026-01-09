@@ -9,7 +9,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import foodImage from '../assets/Food.png';
 import showroomImage from '../assets/Showroom.jpg';
 import buildingImage from '../assets/Building.jpg';
-import warehouseImage from '../assets/Warehouse.png';
+//import warehouseImage from '../assets/Warehouse.png';
 import datacentreImage from '../assets/Datacenter.png';
 import officeindustriesImage from '../assets/Officeindustries.png';
 
@@ -77,7 +77,7 @@ export const IndustriesSection: React.FC = () => {
     {
       title: 'Warehouses',
       description: 'Large-scale ventilation and cooling systems engineered for massive logistical spaces, ensuring stable temperatures for inventory and staff productivity.',
-      imageUrl: warehouseImage,
+      imageUrl: showroomImage,
     },
     {
       title: 'Office Industries',
