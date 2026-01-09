@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface Solution {
   id: string;
@@ -25,7 +26,7 @@ const Solutions: React.FC = () => {
       id: "cold-storage",
       title: "Cold Room and Storage Solutions",
       description: "From walk-in freezers to large-scale refrigerated warehouses, we provide specialized cold storage solutions. Our systems are designed to maintain integrity for perishable goods, pharmaceuticals, and chemical storage.",
-      features: ["PUF Insulated Panels", "Temperature range from -40°C to +15°C", "Remote Monitoring & Data Logging", "Blast Freezing Capabilities"]
+      features: ["PUF Insulated Panels", "-40°C to +15°C Range", "Remote Monitoring", "Blast Freezing"]
     },
     {
       id: "fresh-air",
@@ -37,63 +38,88 @@ const Solutions: React.FC = () => {
       id: "vrv",
       title: "VRV and Centralized Air Conditioning",
       description: "Variable Refrigerant Volume (VRV) systems offer unparalleled flexibility for multi-zone cooling. Perfect for modern offices and hotels, these systems provide individual control to different rooms from a single outdoor unit.",
-      features: ["Independent Zone Control", "Space-Saving Outdoor Units", "Inverter Technology for 30% Energy Savings", "Quiet Indoor Operation"]
+      features: ["Independent Zone Control", "Space-Saving Outdoor Units", "Inverter Technology", "Quiet Indoor Operation"]
     }
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       
-      {/* Hero Section: pt-32 ensures content starts below the Navbar */}
+     
       <section className="bg-[#1a2c6d] pt-32 pb-16 text-white text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Engineering Precision Environments</h1>
-        <p className="text-blue-100 max-w-3xl mx-auto text-lg px-6">
-          Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
-        </p>
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            Engineering Precision Environments
+          </motion.h1>
+
+          <motion.p 
+            className="text-blue-100 max-w-3xl mx-auto text-lg px-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
+            Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
+          </motion.p>
+        </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="space-y-12">
-          {solutionData.map((solution) => (
-            /* The id here now reacts to the scroll-padding-top in index.css */
-            <section 
-              key={solution.id} 
-              id={solution.id} 
-              className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row transition-all hover:shadow-xl hover:border-blue-200"
-            >
-              {/* Left Design Stripe */}
-              <div className="w-full md:w-3 bg-[#f8be4c] transition-all group-hover:w-5"></div>
-              
-              <div className="p-8 md:p-12 flex-1">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                  <h2 className="text-3xl font-bold text-[#1a2c6d]">{solution.title}</h2>
-                  <span className="mt-2 md:mt-0 text-xs font-bold uppercase tracking-widest bg-blue-50 text-blue-700 px-3 py-1 rounded-full">
-                    Expert Solution
-                  </span>
+          {solutionData.map((solution, index) => {
+            
+            const fromLeft = index % 2 === 0;
+
+            return (
+              <motion.section 
+                key={solution.id} 
+                id={solution.id}
+                initial={{ opacity: 0, x: fromLeft ? -100 : 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row transition-all hover:shadow-xl hover:border-blue-200"
+              >
+                {/* Left Design Stripe */}
+                <div className="w-full md:w-3 bg-[#f8be4c] transition-all group-hover:w-5"></div>
+                
+                <div className="p-8 md:p-12 flex-1">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-[#1a2c6d]">{solution.title}</h2>
+                    <span className="mt-2 md:mt-0 text-xs font-bold uppercase tracking-widest bg-blue-50 text-red-400 px-3 py-1 rounded-full">
+                      Expert Solution
+                    </span>
+                  </div>
+
+                  <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                    {solution.description}
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    {solution.features.map((feature, i) => (
+                      <div key={i} className="flex items-center space-x-3 text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div className="w-2 h-2 bg-[#f8be4c] rounded-full"></div>
+                        <span className="font-medium text-[15px]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn">
+                    Enquire about this solution
+                    <svg className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
                 </div>
-
-                <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-                  {solution.description}
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                  {solution.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3 text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                      <div className="w-2 h-2 bg-[#f8be4c] rounded-full"></div>
-                      <span className="font-medium text-[15px]">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn">
-                  Enquire about this solution
-                  <svg className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </button>
-              </div>
-            </section>
-          ))}
+              </motion.section>
+            );
+          })}
         </div>
       </div>
     </div>

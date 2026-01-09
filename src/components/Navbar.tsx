@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Search } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/Vakharia-Airtech-Logo.png';
 
@@ -55,22 +55,47 @@ export function Navbar() {
     <nav className={`fixed top-0 z-50 w-full transition-all duration-500 ${isTransparent ? 'bg-transparent py-4' : 'bg-white shadow-md py-0'}`}>
       <div className="max-w-[98%] xl:max-w-[95%] mx-auto px-2 lg:px-4">
         <div className="flex justify-between items-center h-20">
+          {/* Logo */}
           <Link to="/">
-            <img src={Logo} alt="Logo" className={`h-12 md:h-18 lg:h-20 w-auto object-contain ${isTransparent ? 'brightness-0 invert' : ''}`} />
+            <img 
+              src={Logo} 
+              alt="Logo" 
+              className={`h-12 md:h-18 lg:h-20 w-auto object-contain transition-all duration-300 ${isTransparent ? 'brightness-0 invert' : ''}`} 
+            />
           </Link>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center items-center gap-x-4 lg:gap-x-12 xl:gap-x-16">
             {navLinks.map((link) => (
               link.hasDropdown ? (
-                <div key={link.name} className="relative group py-2" onMouseEnter={() => setOpenDropdown(link.name)} onMouseLeave={() => setOpenDropdown(null)}>
-                  <button className={`text-sm lg:text-[15px] xl:text-lg font-semibold flex items-center gap-1 ${isTransparent ? 'text-white' : 'text-gray-800 hover:text-blue-700'}`}>
+                <div 
+                  key={link.name} 
+                  className="relative group py-2" 
+                  onMouseEnter={() => setOpenDropdown(link.name)} 
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  {/* CHANGED: Now a Link instead of a button */}
+                  <Link 
+                    to={link.to}
+                    onClick={() => setOpenDropdown(null)}
+                    className={`text-sm lg:text-[15px] xl:text-lg font-semibold flex items-center gap-1 transition-colors ${
+                      isTransparent ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-blue-700'
+                    }`}
+                  >
                     {link.name}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                  </button>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                  </Link>
+
+                  {/* Dropdown Menu */}
                   {openDropdown === link.name && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-md shadow-xl border py-3">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-md shadow-xl border border-gray-100 py-3">
                       {link.dropdownItems?.map((item) => (
-                        <Link key={item.name} to={item.to} className="block px-6 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                        <Link 
+                          key={item.name} 
+                          to={item.to} 
+                          onClick={() => setOpenDropdown(null)}
+                          className="block px-6 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                        >
                           {item.name}
                         </Link>
                       ))}
@@ -78,25 +103,45 @@ export function Navbar() {
                   )}
                 </div>
               ) : (
-                <Link key={link.name} to={link.to} className={`text-sm lg:text-[15px] xl:text-lg font-semibold ${isTransparent ? 'text-white' : 'text-gray-800 hover:text-blue-700'}`}>
+                <Link 
+                  key={link.name} 
+                  to={link.to} 
+                  className={`text-sm lg:text-[15px] xl:text-lg font-semibold transition-colors ${
+                    isTransparent ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-blue-700'
+                  }`}
+                >
                   {link.name}
                 </Link>
               )
             ))}
           </div>
 
+          {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-4">
-            <button className={`md:hidden p-2 ${isTransparent ? 'text-white' : 'text-gray-800'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button 
+              className={`md:hidden p-2 transition-colors ${isTransparent ? 'text-white' : 'text-gray-800'}`} 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Mobile Menu Content */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t py-4 px-6 flex flex-col gap-4 shadow-lg">
+        <div className="md:hidden bg-white border-t py-4 px-6 flex flex-col gap-4 shadow-lg animate-in fade-in slide-in-from-top-4 duration-300">
           {navLinks.map((link) => (
-            <Link key={link.name} to={link.to} onClick={() => setIsMenuOpen(false)} className="text-gray-800 font-semibold">{link.name}</Link>
+            <div key={link.name}>
+              <Link 
+                to={link.to} 
+                onClick={() => setIsMenuOpen(false)} 
+                className="text-gray-800 font-bold text-lg block"
+              >
+                {link.name}
+              </Link>
+              {/* Optional: Add small sub-links in mobile menu if desired */}
+            </div>
           ))}
         </div>
       )}

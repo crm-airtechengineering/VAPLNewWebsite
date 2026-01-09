@@ -89,7 +89,7 @@ export function OurWork() {
         
         {/* 2. Simplified Title Bar */}
         <div className="bg-white shadow-xl rounded-2xl p-8 mb-16 border border-gray-100 text-center">
-          <h3 className="text-3xl font-bold text-[#1a2c6d]">Our Projects</h3>
+          <h3 className="text-3xl font-bold text-red-400">Our Projects</h3>
           <div className="w-20 h-1.5 bg-[#f8be4c] mx-auto mt-4 rounded-full"></div>
         </div>
 
