@@ -44,14 +44,15 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
+    // ADD THE BASENAME HERE
+    <Router basename="/VAPLNewWebsite"> 
       <ScrollToTop />
       
       <div className="min-h-screen bg-gray-50 flex flex-col relative">
         {isLoading && <PageLoader />}
-
+  
         <Navbar />
-
+  
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -61,11 +62,10 @@ export default function App() {
             <Route path="/industries" element={<Industries/>} />
             <Route path="/discover" element={<DiscoverUs/>} />
             <Route path="/career" element={<CareerPage/>} />
-            {/* The project page is now live at /ourwork */}
             <Route path="/ourwork" element={<OurWork/>} />
           </Routes>
         </main>
-
+  
         <Footer />
       </div>
     </Router>
