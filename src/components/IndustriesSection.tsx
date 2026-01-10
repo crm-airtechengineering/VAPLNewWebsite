@@ -3,14 +3,15 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { motion } from "framer-motion"; // 1. Import Framer Motion
 
-// Image Imports from src/assets
-import foodImage from '../assets/Food.png';
-import showroomImage from '../assets/Showroom.jpg';
-import buildingImage from '../assets/Building.jpg';
-import warehouseImage from '../assets/Warehouse.png';
-import datacentreImage from '../assets/Datacenter.png';
-import officeindustriesImage from '../assets/Officeindustries.png';
+
+import foodImage from '../assets/industriesimages/Food.png';
+import showroomImage from '../assets/industriesimages/Showroom.jpg';
+import buildingImage from '../assets/industriesimages/Building.jpg';
+import warehouseImage from '../assets/industriesimages/Warehouse.png';
+import datacentreImage from '../assets/industriesimages/Datacenter.png';
+import officeindustriesImage from '../assets/industriesimages/Officeindustries.png';
 
 interface IndustryCardProps {
   title: string;
@@ -36,7 +37,7 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
       </div>
       <CardContent className="p-6">
         <h3 className="mb-3 text-xl font-bold text-blue-900">{title}</h3>
-        <p className="text-gray-600 text-sm leading-relaxed mb-4 min-h-[60px]">
+        <p className="text-gray-600 text-sm leading-relaxed mb-4 min-h-[80px]">
           {description}
         </p>
         <Button 
@@ -53,32 +54,66 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
 
 export const IndustriesSection: React.FC = () => {
   const industries = [
-    { title: 'Food Industries', description: 'Precision-engineered climate control...', imageUrl: foodImage },
-    { title: 'Residential Buildings', description: 'Advanced HVAC solutions...', imageUrl: buildingImage },
-    { title: 'Data Centers & Servers', description: 'Mission-critical precision cooling...', imageUrl: datacentreImage },
-    { title: 'Showrooms', description: 'Elegant climate solutions...', imageUrl: showroomImage },
-    { title: 'Warehouses', description: 'Large-scale ventilation...', imageUrl: warehouseImage },
-    { title: 'Office Industries', description: 'Scalable VRV and VRF systems...', imageUrl: officeindustriesImage }
+    { 
+      title: 'Food Industries', 
+      description: 'Hygiene-centric climate control solutions that adhere to strict FDA/FSSAI standards. We provide specialized ventilation to prevent contamination and maintain food freshness across processing units.', 
+      imageUrl: foodImage 
+    },
+    { 
+      title: 'Residential Buildings', 
+      description: 'Sophisticated HVAC integration for luxury high-rises and townships. Our systems prioritize silent operation, aesthetic integration, and smart temperature zoning for premium living comfort.', 
+      imageUrl: buildingImage 
+    },
+    { 
+      title: 'Data Centers & Servers', 
+      description: 'High-precision cooling systems designed for 100% uptime. We implement advanced hot/cold aisle containment and redundant cooling loads to safeguard sensitive hardware from thermal stress.', 
+      imageUrl: datacentreImage 
+    },
+    { 
+      title: 'Showrooms', 
+      description: 'Creating inviting retail experiences through optimized air distribution. Our VRF systems offer modular control, ensuring consistent comfort for customers while maintaining high energy efficiency.', 
+      imageUrl: showroomImage 
+    },
+    { 
+      title: 'Warehouses', 
+      description: 'Heavy-duty ventilation and large-scale temperature management for industrial storage. We focus on high air-exchange rates and humidity control to protect inventory integrity.', 
+      imageUrl: warehouseImage 
+    },
+    { 
+      title: 'Office Industries', 
+      description: 'Comprehensive workspace climate management that boosts productivity. We deploy intelligent IAQ sensors and energy-efficient VRV systems tailored for modern corporate infrastructure.', 
+      imageUrl: officeindustriesImage 
+    }
   ];
 
   return (
     <section id="industries" className="py-20 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header Section (Animations Removed) */}
         <div className="text-center mb-16">
-          <h2 className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight">
+          <motion.h2 
+          className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} 
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             Industries We Serve
-          </h2>
+          </motion.h2>
 
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
 
-          <p className="text-gray-600 max-w-3xl mx-auto md:text-lg leading-relaxed">
-            Customized HVAC systems built to address the unique needs of various industries through advanced engineering and proven performance.
-          </p>
+          <motion.p 
+          className="text-gray-600 max-w-3xl mx-auto md:text-lg leading-relaxed"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} // Continuous effect
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            Delivering precision-engineered HVAC solutions across diverse sectors. From mission-critical cooling to sustainable climate comfort, we adapt to the unique engineering requirements of your industry.
+          </motion.p>
         </div>
 
-        {/* Industry Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {industries.map((industry, index) => (
             <IndustryCard
