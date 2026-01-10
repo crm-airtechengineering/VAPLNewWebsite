@@ -1,11 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // 1. Import Framer Motion
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-// Image imports...
+// Image Imports from src/assets
 import foodImage from '../assets/Food.png';
 import showroomImage from '../assets/Showroom.jpg';
 import buildingImage from '../assets/Building.jpg';
@@ -13,7 +12,6 @@ import warehouseImage from '../assets/Warehouse.png';
 import datacentreImage from '../assets/Datacenter.png';
 import officeindustriesImage from '../assets/Officeindustries.png';
 
-// IndustryCard component remains the same...
 interface IndustryCardProps {
   title: string;
   description: string;
@@ -67,39 +65,20 @@ export const IndustriesSection: React.FC = () => {
     <section id="industries" className="py-20 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header Section with Motion */}
+        {/* Header Section (Animations Removed) */}
         <div className="text-center mb-16">
-          <motion.h2 
-            className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} // 2. Set to false for continuous animation
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+          <h2 className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight">
             Industries We Serve
-          </motion.h2>
+          </h2>
 
-          {/* Animated decorative bar */}
-          <motion.div 
-            className="w-20 h-1 bg-blue-600 mx-auto mb-6"
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          ></motion.div>
+          <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
 
-          <motion.p 
-            className="text-gray-600 max-w-3xl mx-auto md:text-lg leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          >
+          <p className="text-gray-600 max-w-3xl mx-auto md:text-lg leading-relaxed">
             Customized HVAC systems built to address the unique needs of various industries through advanced engineering and proven performance.
-          </motion.p>
+          </p>
         </div>
 
-        {/* Grid remains static (except for internal hover effects) */}
+        {/* Industry Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {industries.map((industry, index) => (
             <IndustryCard
@@ -114,3 +93,5 @@ export const IndustriesSection: React.FC = () => {
     </section>
   );
 };
+
+export default IndustriesSection;
