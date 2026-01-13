@@ -67,14 +67,14 @@ export function VideoHero() {
       </div>
 
       {/* Optional: Add a smooth fade-in for the text content on mobile */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+      {/* <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           <h1 className="text-white text-4xl md:text-7xl font-bold mb-4 drop-shadow-2xl">
             Airtech Engineering
           </h1>
           <p className="text-white text-lg md:text-2xl max-w-2xl opacity-90">
             Innovative HVAC solutions for modern infrastructure.
           </p>
-      </div>
+      </div> */}
 
       {/* Navigation Arrows - Hidden on small mobile to avoid clutter, visible on md+ */}
       <div className="hidden md:block">
