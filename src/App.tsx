@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+// 1. Import HashRouter instead of BrowserRouter
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { PageLoader } from './components/PageLoader';
@@ -10,7 +11,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/ContactUs';
 import Solutions from './pages/Solutions';
 import { Industries } from './pages/Industries';
-import { OurWork } from './pages/OurWork'; // Ensure this matches your file name
+import { OurWork } from './pages/OurWork'; 
 import DiscoverUs from './pages/DiscoverUs';
 import CareerPage from './pages/CareerPage';
 
@@ -44,8 +45,10 @@ export default function App() {
   }, []);
 
   return (
-    // ADD THE BASENAME HERE
-    <Router basename="/VAPLNewWebsite"> 
+    /* NOTE: HashRouter does NOT need a basename property. 
+       It handles the subfolder automatically.
+    */
+    <Router> 
       <ScrollToTop />
       
       <div className="min-h-screen bg-gray-50 flex flex-col relative">
