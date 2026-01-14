@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom'; // Using Link for smoother navigation
 
-// Relative path imports
 import HighRiseImage from '../assets/real-estate.jpg'; 
 import BungalowImage from '../assets/retail1.jpg'; 
 import EducationImage from '../assets/Education.jpg';
@@ -63,26 +63,28 @@ export function Industries() {
   ];
 
   return (
-    <div className="bg-white overflow-x-hidden">
-      {/* --- HERO / HEADER (Continuous Down to Up) --- */}
+    // FIX 1: Using overflow-hidden and relative to kill the horizontal scrollbar
+    <div className="bg-white overflow-hidden relative w-full">
+      
+      {/* --- HERO / HEADER --- */}
       <section className="bg-[#1a2c6d] py-24 text-center text-white">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h1 
             className="text-4xl md:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} 
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             Industries We Serve
           </motion.h1>
           
           <motion.p 
             className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} 
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           >
             Specialized engineering expertise tailored to the unique climate and 
             ventilation requirements of every sector.
@@ -90,7 +92,7 @@ export function Industries() {
         </div>
       </section>
 
-      {/* --- DETAILED SECTIONS (Continuous Side to Side) --- */}
+      {/* --- DETAILED SECTIONS --- */}
       {industries.map((industry, index) => {
         const isEven = index % 2 === 0;
 
@@ -98,7 +100,8 @@ export function Industries() {
           <section 
             key={industry.id} 
             id={industry.id} 
-            className={`py-24 scroll-mt-20 overflow-hidden ${isEven ? 'bg-white' : 'bg-gray-50'}`}
+            // FIX 2: scroll-mt-24 ensures the header isn't hidden by Navbar
+            className={`py-24 scroll-mt-24 overflow-hidden relative ${isEven ? 'bg-white' : 'bg-gray-50'}`}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12`}>
@@ -106,16 +109,18 @@ export function Industries() {
                 {/* Visual Side */}
                 <motion.div 
                   className="flex-1 w-full"
-                  initial={{ opacity: 0, x: isEven ? -150 : 150 }}
+                  // FIX 3: Reduced X distance from 150 to 50 to prevent horizontal overflow
+                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 >
                   <div className={`aspect-video rounded-3xl relative overflow-hidden shadow-2xl flex items-center justify-center ${isEven ? 'bg-blue-600' : 'bg-[#f8be4c]'}`}>
                     <img 
                       src={industry.image} 
                       alt={industry.name} 
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
+                      loading="lazy"
                     />
                   </div>
                 </motion.div>
@@ -123,10 +128,10 @@ export function Industries() {
                 {/* Content Side */}
                 <motion.div 
                   className="flex-1 space-y-6"
-                  initial={{ opacity: 0, x: isEven ? 150 : -150 }}
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-1 bg-[#f8be4c]"></div>
@@ -165,20 +170,19 @@ export function Industries() {
       {/* --- CALL TO ACTION --- */}
       <motion.section 
         className="pb-20 pt-10 text-center"
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
       >
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-black mb-8">Need a specialized solution for your industry?</h2>
-          {/* Linked to Contact page with an ID anchor */}
-          <a 
-            href="/contact#contact-form" 
-            className="inline-block bg-[#f8be4c] text-[#483730] font-bold px-10 py-4 rounded-xl hover:bg-[#eab308] transition-colors"
+          <Link 
+            to="/contact#contact" 
+            className="inline-block bg-[#f8be4c] text-[#483730] font-bold px-10 py-4 rounded-xl hover:bg-[#eab308] transition-all hover:scale-105"
           >
             Consult Our Experts
-          </a>
+          </Link>
         </div>
       </motion.section>
     </div>

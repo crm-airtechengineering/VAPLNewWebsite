@@ -25,9 +25,12 @@ const navLinks = [
     hasDropdown: true,
     dropdownItems: [
       { name: 'High Rise Buildings', to: '/industries#high-rise-buildings' },
-      { name: 'Healthcare', to: '/industries#healthcare' }, // Fixed space typo here
-      { name: 'Manufacturing', to: '/industries#manufacturing' },
+      { name: 'Luxurious Bungalows', to: '/industries#luxurious-bungalows' },
+      { name: 'Healthcare', to: '/industries#healthcare' },
+      { name: 'Education', to: '/industries#education' },
       { name: 'Finance & Banking', to: '/industries#finance-banking' },
+      { name: 'Manufacturing', to: '/industries#manufacturing' },
+      
     ]
   },
   { name: 'Our Work', to: '/ourwork' },
@@ -147,7 +150,11 @@ export function Navbar() {
               {link.hasDropdown && (
                 <div className="pl-4 flex flex-col gap-2 border-l-2 border-blue-100">
                   {link.dropdownItems?.map((item) => (
-                    <Link key={item.name} to={item.to} className="text-gray-500 text-sm">
+                    <Link 
+                      key={item.name} 
+                      to={item.to} 
+                      className="text-gray-600 text-sm hover:text-blue-700 py-1"
+                    >
                       {item.name}
                     </Link>
                   ))}

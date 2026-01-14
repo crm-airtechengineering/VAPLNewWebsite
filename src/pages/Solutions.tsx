@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Solution {
   id: string;
@@ -9,7 +10,30 @@ interface Solution {
 }
 
 const Solutions: React.FC = () => {
+  const { hash } = useLocation();
+
+  // FIX: Force scroll to hash on live site
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        // Timeout ensures the DOM is fully rendered before scrolling
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [hash]);
+
   const solutionData: Solution[] = [
+    {
+      id: "vrv",
+      title: "VRV and Centralized Air Conditioning",
+      description: "Variable Refrigerant Volume (VRV) systems offer unparalleled flexibility for multi-zone cooling. Perfect for modern offices and hotels, these systems provide individual control to different rooms from a single outdoor unit.",
+      features: ["Independent Zone Control", "Space-Saving Outdoor Units", "Inverter Technology", "Quiet Indoor Operation"]
+    },
     {
       id: "cleanroom",
       title: "Clean and Controlled Rooms",
@@ -35,24 +59,24 @@ const Solutions: React.FC = () => {
       features: ["Treated Fresh Air Units (TFA)", "Energy Recovery Ventilators (ERV)", "Multi-stage Air Filtration", "CO2 Sensor Integration"]
     },
     {
-      id: "vrv",
-      title: "VRV and Centralized Air Conditioning",
-      description: "Variable Refrigerant Volume (VRV) systems offer unparalleled flexibility for multi-zone cooling. Perfect for modern offices and hotels, these systems provide individual control to different rooms from a single outdoor unit.",
-      features: ["Independent Zone Control", "Space-Saving Outdoor Units", "Inverter Technology", "Quiet Indoor Operation"]
+      id: "basement-ventilation",
+      title: "Basement Ventilation",
+      description: "Specialized ventilation systems for underground parking and basements to manage CO levels and ensure smoke clearance. We utilize advanced jet fan technology to provide efficient airflow and safety in confined spaces.",
+      features: ["Jet Fan Impulse Systems", "Carbon Monoxide (CO) Sensors", "Smoke Extraction & Fire Safety", "Energy-Efficient Induction Fans"]
     }
   ];
 
   return (
     <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       
-     
+      {/* Header Section */}
       <section className="bg-[#1a2c6d] pt-32 pb-16 text-white text-center">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h1 
             className="text-4xl md:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Engineering Precision Environments
@@ -62,7 +86,7 @@ const Solutions: React.FC = () => {
             className="text-blue-100 max-w-3xl mx-auto text-lg px-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
@@ -73,7 +97,6 @@ const Solutions: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="space-y-12">
           {solutionData.map((solution, index) => {
-            
             const fromLeft = index % 2 === 0;
 
             return (
@@ -82,9 +105,9 @@ const Solutions: React.FC = () => {
                 id={solution.id}
                 initial={{ opacity: 0, x: fromLeft ? -100 : 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row transition-all hover:shadow-xl hover:border-blue-200"
+                className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row transition-all hover:shadow-xl hover:border-blue-200 scroll-mt-32"
               >
                 {/* Left Design Stripe */}
                 <div className="w-full md:w-3 bg-[#f8be4c] transition-all group-hover:w-5"></div>
@@ -110,12 +133,15 @@ const Solutions: React.FC = () => {
                     ))}
                   </div>
 
-                  <button className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn">
+                  <Link 
+                    to="/contact" 
+                    className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn"
+                  >
                     Enquire about this solution
                     <svg className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </motion.section>
             );
