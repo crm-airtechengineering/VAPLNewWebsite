@@ -17,14 +17,14 @@ interface IndustryCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  buttonText?: string;
+  //buttonText?: string;
 }
 
 const IndustryCard: React.FC<IndustryCardProps> = ({ 
   title, 
   description, 
   imageUrl,
-  buttonText = 'Case Study'
+ // buttonText = 'Case Study'
 }) => {
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 group border-none shadow-md">
@@ -40,13 +40,13 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
         <p className="text-gray-600 text-sm leading-relaxed mb-4 min-h-[80px]">
           {description}
         </p>
-        <Button 
+        {/* <Button 
           variant="outline" 
           className="w-full group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all flex items-center justify-center"
         >
           {buttonText}
           <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        </Button> */}
       </CardContent>
     </Card>
   );

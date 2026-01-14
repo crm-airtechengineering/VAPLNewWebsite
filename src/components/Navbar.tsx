@@ -25,7 +25,7 @@ const navLinks = [
     hasDropdown: true,
     dropdownItems: [
       { name: 'High Rise Buildings', to: '/industries#high-rise-buildings' },
-      { name: 'Healthcare', to: '/industries#healthcare' },
+      { name: 'Healthcare', to: '/industries#healthcare' }, // Fixed space typo here
       { name: 'Manufacturing', to: '/industries#manufacturing' },
       { name: 'Finance & Banking', to: '/industries#finance-banking' },
     ]
@@ -40,7 +40,6 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  // Logic to determine if navbar should be transparent
   const isTransparent = location.pathname === '/' && !isScrolled;
 
   useEffect(() => {
@@ -147,7 +146,7 @@ export function Navbar() {
               </Link>
               {link.hasDropdown && (
                 <div className="pl-4 flex flex-col gap-2 border-l-2 border-blue-100">
-                  {link.dropdownItems?.slice(0, 3).map((item) => (
+                  {link.dropdownItems?.map((item) => (
                     <Link key={item.name} to={item.to} className="text-gray-500 text-sm">
                       {item.name}
                     </Link>
