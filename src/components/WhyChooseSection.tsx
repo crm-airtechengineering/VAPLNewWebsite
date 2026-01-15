@@ -60,7 +60,7 @@ export const WhyChooseSection: React.FC = () => {
     {
       icon: <Hammer size={28} />,
       title: 'Design & Build Capability',
-      description: 'Aqua Chill offers complete in-house design and turnkey execution, eliminating coordination gaps, ensuring with seamless project delivery under one roof.'
+      description: 'Vakharia Airtech offers complete in-house design and turnkey execution, eliminating coordination gaps, ensuring with seamless project delivery under one roof.'
     },
     {
       icon: <CheckCircle size={28} />,

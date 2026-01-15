@@ -28,9 +28,9 @@ export function About() {
   ];
 
   const stats = [
-    { label: 'Years of Experience', value: '28+' },
-    { label: 'Projects Completed', value: '200+' },
-    { label: 'Expert Engineers', value: '50+' },
+    { label: 'Years of Experience', value: '21+' },
+    { label: 'Projects Completed', value: '10,000+' },
+    { label: 'Inhouse Experts', value: '120+' },
     { label: 'Industries Served', value: '12+' },
   ];
 
@@ -38,6 +38,7 @@ export function About() {
     { name: 'Executive Director 1', role: 'Technical Leadership', desc: 'Expertise in industrial HVAC design.' },
     { name: 'Executive Director 2', role: 'Strategic Operations', desc: 'Specializing in turnkey project management.' },
     { name: 'Executive Director 3', role: 'Engineering Excellence', desc: 'Focused on cleanroom standards and compliance.' },
+    { name: 'Executive Director 4',role: 'Business Strategy',desc: 'Driving growth through client partnerships and sustainable air technology solutions.'}
   ];
 
   return (
@@ -130,7 +131,7 @@ export function About() {
             <div className="w-20 h-1 bg-[#f8be4c] mx-auto mb-4"></div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {leadership.map((member, index) => (
               <div key={index} className="bg-gray-50 p-8 rounded-3xl border border-gray-100 text-center group hover:shadow-xl hover:border-[#f8be4c] transition-all">
                 <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-md">

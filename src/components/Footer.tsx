@@ -27,7 +27,7 @@ export function Footer() {
   const socialLinks = [
     { icon: Linkedin, href: 'https://www.linkedin.com/company/vakharia-airtech-pvt-ltd/', label: 'LinkedIn' },
     { icon: Instagram, href: 'https://www.instagram.com/vakharia_airtech?igsh=MXR2eXN3d2l2c3VsMQ==', label: 'Instagram' },
-    { icon: Facebook, href: 'https://www.facebook.com/share/15Y9vL6fK8/', label: 'Facebook' },
+    { icon: Facebook, href: 'https://www.facebook.com/share/1GBKFysrRD/?mibextid=wwXIfr', label: 'Facebook' },
   ];
 
   return (
@@ -48,9 +48,9 @@ export function Footer() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
                 <div className="flex-shrink-0">
-                  <img src={Logo} alt="Logo" className="h-12 w-auto" />
+                  <img src={Logo} alt="Logo" className="h-16 w-auto" />
                 </div>
-                <h3 className="text-lg text-white font-bold">Vakharia Airtech</h3>
+                <h3 className="text-lg text-white font-bold">Vakharia Airtech Pvt Ltd.</h3>
               </div>
               <p className="text-base text-[#f8be4c] mb-4">HVAC Engineering Experts</p>
             </div>
