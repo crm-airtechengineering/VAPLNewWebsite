@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// 1. Switched HashRouter to BrowserRouter
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -44,12 +43,17 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  /**
+   * DYNAMIC BASENAME LOGIC:
+   * If the build mode is 'gh-pages', use the repo name subfolder.
+   * Otherwise (on Vercel or Localhost), use the root '/'.
+   */
+  const getBasename = () => {
+    return import.meta.env.MODE === 'gh-pages' ? '/VAPLNewWebsite' : '/';
+  };
+
   return (
-    /**
-     * UPDATED: Changed to BrowserRouter and added basename.
-     * The basename MUST match your repository name exactly.
-     */
-    <Router basename="/VAPLNewWebsite"> 
+    <Router basename={getBasename()}> 
       <ScrollToTop />
       
       <div className="min-h-screen bg-gray-50 flex flex-col relative">
