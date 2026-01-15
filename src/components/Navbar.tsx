@@ -16,7 +16,7 @@ const navLinks = [
       { name: 'Chillers', to: '/solutions#chillers' },
       { name: 'Cold Storage Solutions', to: '/solutions#cold-storage' },
       { name: 'Fresh Air Systems', to: '/solutions#fresh-air' },
-      { name: 'Basement Ventilation', to: '/solutions#basement-ventilation' },
+      { name: 'Lift and Staircase Pressurization', to: '/solutions#staircase-pressurization' },
     ]
   },
   { 

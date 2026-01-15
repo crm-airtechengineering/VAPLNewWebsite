@@ -43,11 +43,6 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  /**
-   * DYNAMIC BASENAME LOGIC:
-   * If the build mode is 'gh-pages', use the repo name subfolder.
-   * Otherwise (on Vercel or Localhost), use the root '/'.
-   */
   const getBasename = () => {
     return import.meta.env.MODE === 'gh-pages' ? '/VAPLNewWebsite' : '/';
   };

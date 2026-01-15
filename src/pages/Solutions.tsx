@@ -12,12 +12,11 @@ interface Solution {
 const Solutions: React.FC = () => {
   const { hash } = useLocation();
 
-  // FIX: Force scroll to hash on live site
+  // Force scroll to hash on live site
   useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
       if (element) {
-        // Timeout ensures the DOM is fully rendered before scrolling
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
@@ -59,10 +58,10 @@ const Solutions: React.FC = () => {
       features: ["Treated Fresh Air Units (TFA)", "Energy Recovery Ventilators (ERV)", "Multi-stage Air Filtration", "CO2 Sensor Integration"]
     },
     {
-      id: "basement-ventilation",
-      title: "Basement Ventilation",
-      description: "Specialized ventilation systems for underground parking and basements to manage CO levels and ensure smoke clearance. We utilize advanced jet fan technology to provide efficient airflow and safety in confined spaces.",
-      features: ["Jet Fan Impulse Systems", "Carbon Monoxide (CO) Sensors", "Smoke Extraction & Fire Safety", "Energy-Efficient Induction Fans"]
+      id: "staircase-pressurization", 
+      title: "Lift and Staircase Pressurization",
+      description: "Critical life-safety systems designed to keep escape routes free of smoke during fire emergencies. We engineer high-pressure air systems that prevent smoke ingress into stairwells and lift shafts, ensuring safe evacuation in high-rise structures.",
+      features: ["Automated Pressure Sensors", "High-Static Blowers", "Fire Alarm Integration", "NBC & Local Fire Norms Compliance"]
     }
   ];
 
@@ -115,7 +114,7 @@ const Solutions: React.FC = () => {
                 <div className="p-8 md:p-12 flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                     <h2 className="text-3xl font-bold text-[#1a2c6d]">{solution.title}</h2>
-                    <span className="mt-2 md:mt-0 text-xs font-bold uppercase tracking-widest bg-blue-50 text-red-400 px-3 py-1 rounded-full">
+                    <span className="mt-2 md:mt-0 text-xs font-bold uppercase tracking-widest bg-blue-50 text-blue-600 px-3 py-1 rounded-full">
                       Expert Solution
                     </span>
                   </div>
