@@ -9,9 +9,9 @@ import { motion } from "framer-motion"; // 1. Import Framer Motion
 import foodImage from '../assets/industriesimages/Food.png';
 import showroomImage from '../assets/industriesimages/Showroom.jpg';
 import buildingImage from '../assets/industriesimages/Building.jpg';
-import warehouseImage from '../assets/industriesimages/Warehouse.png';
-import datacentreImage from '../assets/industriesimages/Datacenter.png';
-import officeindustriesImage from '../assets/industriesimages/Officeindustries.png';
+import warehouseImage from '../assets/industriesimages/Warehouse.PNG';
+import datacentreImage from '../assets/industriesimages/Datacenter.PNG';
+import officeindustriesImage from '../assets/industriesimages/Officeindustries.PNG';
 
 interface IndustryCardProps {
   title: string;
