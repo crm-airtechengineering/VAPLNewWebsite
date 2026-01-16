@@ -122,7 +122,7 @@ const Solutions: React.FC = () => {
                 
                 <div className="p-8 md:p-12 flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                    <h2 className="text-3xl font-bold text-[#1a2c6d]">{solution.title}</h2>
+                    <h2 className="text-3xl font-bold text-[#483630]">{solution.title}</h2>
                     <span className="mt-2 md:mt-0 text-xs font-bold uppercase tracking-widest bg-blue-50 text-blue-600 px-3 py-1 rounded-full">
                       Expert Solution
                     </span>

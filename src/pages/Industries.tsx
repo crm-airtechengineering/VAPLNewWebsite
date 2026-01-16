@@ -9,6 +9,7 @@ import EducationImage from '../assets/Education.jpg';
 import BankingImage from '../assets/Banking.jpg';
 import ManufacturingImage from '../assets/manufacturing.jpg';
 import HealthcareImage from '../assets/healthcare.jpg';
+import IndustriesHero from '../assets/industrieshero.jpg'
 
 export function Industries() {
   const industries = [
@@ -84,7 +85,7 @@ export function Industries() {
       `}} />
 
       {/* --- HERO / HEADER --- */}
-      <section className="bg-[#1a2c6d] py-24 text-center text-white">
+      {/* <section className="bg-[#1a2c6d] py-24 text-center text-white">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h1 
             className="text-4xl md:text-6xl font-bold mb-6"
@@ -107,7 +108,37 @@ export function Industries() {
             ventilation requirements of every sector.
           </motion.p>
         </div>
-      </section>
+      </section> */}
+       <section 
+  className="relative bg-cover bg-center bg-no-repeat min-h-[70vh] flex items-center py-32 text-center text-white"
+  style={{ 
+   
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${IndustriesHero})` 
+  }}
+>
+  <div className="max-w-7xl mx-auto px-4 w-full relative z-10">
+    <motion.h1 
+      className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-md"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      Industries We Serve
+    </motion.h1>
+    
+    <motion.p 
+      className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed drop-shadow-sm"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+    >
+      Specialized engineering expertise tailored to the unique climate and 
+      ventilation requirements of every sector.
+    </motion.p>
+  </div>
+</section>
 
       {/* --- DETAILED SECTIONS --- */}
       {industries.map((industry, index) => {
