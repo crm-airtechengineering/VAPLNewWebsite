@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // 1. Import motion
+import { motion } from 'framer-motion'; 
 import { Card, CardContent } from './ui/card';
 import { 
   Settings, 
@@ -36,7 +36,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
 
 export const WhyChooseSection: React.FC = () => {
   const features = [
-    // ... your features array remains the same
+   
     {
       icon: <Settings size={28} />,
       title: 'Precision-Engineered Systems',
@@ -79,14 +79,14 @@ export const WhyChooseSection: React.FC = () => {
             className="text-[#4A3F35] mb-4 text-3xl md:text-5xl font-bold"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} // 2. Set to false for continuous animation
+            viewport={{ once: false }} 
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Why Choose Vakharia Airtech?
           </motion.h2>
 
           <motion.div 
-            className="w-24 h-1 bg-[#766b68] mx-auto mb-6 rounded-full"
+            className="w-24 h-1 bg-[#f8be4c] mx-auto mb-6 rounded-full"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}

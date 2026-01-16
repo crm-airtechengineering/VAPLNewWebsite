@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import HeroImage from '../assets/solutionshero.jpg';
 
 interface Solution {
   id: string;
@@ -12,7 +13,6 @@ interface Solution {
 const Solutions: React.FC = () => {
   const { hash } = useLocation();
 
-  // Force scroll to hash on live site
   useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
@@ -68,28 +68,37 @@ const Solutions: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       
-      {/* Header Section */}
-      <section className="bg-[#1a2c6d] pt-32 pb-16 text-white text-center">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold mb-4"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Engineering Precision Environments
-          </motion.h1>
+      {/* Updated Header Section with Background Image */}
+      {/* Header Section with Natural Image Colors */}
+      <section 
+        className="relative bg-cover bg-center bg-no-repeat pt-40 pb-24 text-white"
+        style={{ 
+          // Uses a neutral black gradient instead of blue to maintain image colors
+          backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%), url(${HeroImage})` 
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl text-left">
+            <motion.h1 
+              className="text-4xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              Engineering Precision <br className="hidden md:block" /> Environments
+            </motion.h1>
 
-          <motion.p 
-            className="text-blue-100 max-w-3xl mx-auto text-lg px-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          >
-            Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
-          </motion.p>
+            <motion.p 
+              className="text-gray-100 text-lg md:text-xl max-w-2xl drop-shadow-md"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
+              Advanced HVAC and Airtech solutions tailored to meet the rigorous demands of modern industry.
+            </motion.p>
+          </div>
         </div>
       </section>
 

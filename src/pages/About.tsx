@@ -16,7 +16,7 @@ export function About() {
       description: 'To provide high-performance, energy-efficient HVAC and Cleanroom solutions that ensure technical precision and environmental safety.',
     },
     {
-      icon: Factory, // Changed to Factory for History context
+      icon: Factory,
       title: 'Our Legacy',
       description: 'Established in 2004, we have nearly two decades of experience in executing complex turnkey air technology projects across India.',
     },
@@ -59,7 +59,7 @@ export function About() {
     <section id="about" className="min-h-screen bg-gray-50 overflow-x-hidden">
       
       {/* 1. Hero Section */}
-      <div className="bg-[#f6ac72] py-24 text-black">
+      <div className="bg-[#fbceac] py-40 text-black">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.h2 
             className="text-4xl md:text-5xl font-bold mb-6"

@@ -63,15 +63,34 @@ export function Industries() {
   ];
 
   return (
-    <div className="bg-white overflow-x-hidden">
-      {/* --- HERO / HEADER (Continuous Down to Up) --- */}
+    <div className="bg-white overflow-x-hidden hide-scrollbar">
+      {/* Inline Style to hide scrollbar across all browsers */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        /* Also apply to body for a truly clean look */
+        body::-webkit-scrollbar {
+          display: none;
+        }
+        body {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}} />
+
+      {/* --- HERO / HEADER --- */}
       <section className="bg-[#1a2c6d] py-24 text-center text-white">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h1 
             className="text-4xl md:text-6xl font-bold mb-6"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} // Continuous
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Industries We Serve
@@ -81,7 +100,7 @@ export function Industries() {
             className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }} // Continuous
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             Specialized engineering expertise tailored to the unique climate and 
@@ -90,7 +109,7 @@ export function Industries() {
         </div>
       </section>
 
-      {/* --- DETAILED SECTIONS (Continuous Side to Side) --- */}
+      {/* --- DETAILED SECTIONS --- */}
       {industries.map((industry, index) => {
         const isEven = index % 2 === 0;
 
@@ -103,12 +122,11 @@ export function Industries() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12`}>
                 
-                {/* Visual Side: Comes from left if even, right if odd */}
                 <motion.div 
                   className="flex-1 w-full"
                   initial={{ opacity: 0, x: isEven ? -150 : 150 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }} // Continuous
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                   <div className={`aspect-video rounded-3xl relative overflow-hidden shadow-2xl flex items-center justify-center ${isEven ? 'bg-blue-600' : 'bg-[#f8be4c]'}`}>
@@ -120,12 +138,11 @@ export function Industries() {
                   </div>
                 </motion.div>
 
-                {/* Content Side: Comes from right if even, left if odd */}
                 <motion.div 
                   className="flex-1 space-y-6"
                   initial={{ opacity: 0, x: isEven ? 150 : -150 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }} // Continuous
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
                 >
                   <div className="flex items-center gap-3">
@@ -162,12 +179,12 @@ export function Industries() {
         );
       })}
 
-      {/* --- CALL TO ACTION (Continuous Up) --- */}
+      {/* --- CALL TO ACTION --- */}
       <motion.section 
         className="pb-20 pt-10 text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }} // Continuous
+        viewport={{ once: false }}
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-4xl mx-auto px-4">

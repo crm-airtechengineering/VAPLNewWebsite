@@ -31,7 +31,7 @@ const BuildingTrustSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full py-20 overflow-hidden" id="about">
+    <section className="w-full py-10 overflow-hidden" id="about">
       <div className="max-w-7xl mx-auto px-6 text-center">
 
         {/* Section Title: Slides up */}
@@ -66,7 +66,7 @@ const BuildingTrustSection: React.FC = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
-              // Staggered effect based on index (0.1s, 0.2s, 0.3s, 0.4s)
+             
               transition={{ duration: 0.6, delay: index * 0.1 }} 
             >
               {/* Icon Container */}
@@ -79,7 +79,7 @@ const BuildingTrustSection: React.FC = () => {
               </div>
 
               {/* Stat Value */}
-              <h3 className="text-4xl font-bold text-[#1a2c6d] mt-4">
+              <h3 className="text-4xl font-bold text-[#2c2620] mt-4">
                 {stat.value}
               </h3>
 

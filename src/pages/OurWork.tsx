@@ -113,7 +113,7 @@ export function OurWork() {
                   <MapPin className="w-4 h-4 text-[#E53935]" />
                   {project.location}
                 </div>
-                <h3 className="text-xl font-bold text-[#1a2c6d] mb-4 group-hover:text-[#E53935] transition-colors">
+                <h3 className="text-xl font-bold text-[#4A3F35] mb-4 group-hover:text-[#E53935] transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">

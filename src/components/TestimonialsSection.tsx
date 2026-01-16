@@ -63,7 +63,7 @@ const TEST_DATA: Testimonial[] = [
 
 export const TestimonialsSection: React.FC = () => {
   return (
-    <section id="testimonials" className="relative py-20 bg-white overflow-hidden">
+    <section id="testimonials" className="relative py-10 bg-white overflow-hidden">
       {/* 1. Infinite Marquee Styles */}
       <style>{`
         @keyframes testimonial-marquee {
@@ -83,8 +83,8 @@ export const TestimonialsSection: React.FC = () => {
         }
       `}</style>
 
-      <div className="py-12 px-4 md:px-8 text-center">
-        <motion.h2 
+      <div className="px-4 md:px-8 text-center">
+        {/* <motion.h2 
           className="text-3xl md:text-4xl font-bold text-[#4A3F35]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,6 +93,7 @@ export const TestimonialsSection: React.FC = () => {
         >
           What Our Clients Say
         </motion.h2>
+        <div className="w-20 h-1 bg-[#f8be4c] mx-auto mb-6 mt-6"></div>
         <motion.p 
           className="text-base md:text-lg text-[#1F1F1F] max-w-2xl mx-auto mt-2"
           initial={{ opacity: 0, y: 20 }}
@@ -101,7 +102,29 @@ export const TestimonialsSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           Trusted by industry leaders across India for reliable and innovative HVAC solutions.
-        </motion.p>
+        </motion.p> */}
+        <motion.h2 
+          className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} 
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+           
+          What Our Clients Say
+          </motion.h2>
+
+          <div className="w-20 h-1 bg-[#f8be4c] mx-auto mb-6"></div>
+
+          <motion.p 
+          className="text-gray-700 max-w-3xl text-lg font-medium mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }} // Continuous effect
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            Trusted by industry leaders across India for reliable and innovative HVAC solutions.
+          </motion.p>
       </div>
 
       {/* --- Continuous Scrolling Section --- */}

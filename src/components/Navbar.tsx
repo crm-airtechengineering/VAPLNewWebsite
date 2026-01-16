@@ -35,6 +35,7 @@ const navLinks = [
   },
   { name: 'Our Work', to: '/ourwork' },
   { name: 'Contact Us', to: '/contact' },
+  //{name:'Career', to:'/career'}
 ];
 
 export function Navbar() {

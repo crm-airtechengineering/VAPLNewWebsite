@@ -36,7 +36,7 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
         />
       </div>
       <CardContent className="p-6">
-        <h3 className="mb-3 text-xl font-bold text-blue-900">{title}</h3>
+        <h3 className="mb-3 text-xl font-bold text-[#4A3F35]">{title}</h3>
         <p className="text-gray-600 text-sm leading-relaxed mb-4 min-h-[80px]">
           {description}
         </p>
@@ -101,10 +101,10 @@ export const IndustriesSection: React.FC = () => {
             Industries We Serve
           </motion.h2>
 
-          <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <div className="w-20 h-1 bg-[#f8be4c] mx-auto mb-6"></div>
 
           <motion.p 
-          className="text-gray-600 max-w-3xl mx-auto md:text-lg leading-relaxed"
+          className="text-gray-700 max-w-3xl text-lg font-medium mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }} // Continuous effect
