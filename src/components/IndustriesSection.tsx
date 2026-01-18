@@ -1,89 +1,102 @@
 import React from 'react';
 import { Card, CardContent } from './ui/card';
-import { Button } from './ui/button';
-import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { motion } from "framer-motion"; // 1. Import Framer Motion
+import { motion } from "framer-motion";
 
-
+// Import your assets
 import foodImage from '../assets/industriesimages/Food.png';
 import showroomImage from '../assets/industriesimages/Showroom.jpg';
 import buildingImage from '../assets/industriesimages/Building.jpg';
-import warehouseImage from '../assets/industriesimages/Warehouse.PNG';
-import datacentreImage from '../assets/industriesimages/Datacenter.PNG';
 import officeindustriesImage from '../assets/industriesimages/Officeindustries.PNG';
+import healthcareImage from '../assets/healthcare.jpg'
+import ManufacturingImage from '../assets/manufacturing.jpg';
+import EducationImage from '../assets/Education.jpg';
+import BankingImage from '../assets/Banking.jpg';
 
 interface IndustryCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  //buttonText?: string;
+  index: number;
 }
 
 const IndustryCard: React.FC<IndustryCardProps> = ({ 
   title, 
   description, 
   imageUrl,
- // buttonText = 'Case Study'
+  index
 }) => {
   return (
-    <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 group border-none shadow-md">
-      <div className="relative h-48 overflow-hidden">
-        <ImageWithFallback
-          src={imageUrl}
-          alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
-      </div>
-      <CardContent className="p-6">
-        <h3 className="mb-3 text-xl font-bold text-[#4A3F35]">{title}</h3>
-        <p className="text-gray-600 text-sm leading-relaxed mb-4 min-h-[80px]">
-          {description}
-        </p>
-        {/* <Button 
-          variant="outline" 
-          className="w-full group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all flex items-center justify-center"
-        >
-          {buttonText}
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button> */}
-      </CardContent>
-    </Card>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }} // Staggered UX effect
+    >
+      <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 group border-none shadow-md bg-white">
+        <div className="relative h-40 overflow-hidden">
+          <ImageWithFallback
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        </div>
+        <CardContent className="p-5">
+          {/* text-lg fits better than text-xl in a 4-column grid */}
+          <h3 className="mb-2 text-lg font-bold text-[#4A3F35] group-hover:text-[#f8be4c] transition-colors">
+            {title}
+          </h3>
+          <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-4">
+            {description}
+          </p>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 
 export const IndustriesSection: React.FC = () => {
   const industries = [
     { 
-      title: 'Food Industries', 
-      description: 'Hygiene-centric climate control solutions that adhere to strict FDA/FSSAI standards. We provide specialized ventilation to prevent contamination and maintain food freshness across processing units.', 
-      imageUrl: foodImage 
-    },
-    { 
-      title: 'Residential Buildings', 
-      description: 'Sophisticated HVAC integration for luxury high-rises and townships. Our systems prioritize silent operation, aesthetic integration, and smart temperature zoning for premium living comfort.', 
+      title: 'High Rise Buildings', 
+      description: 'Sophisticated HVAC integration for luxury high-rises. Silent operation and smart temperature zoning for premium comfort.', 
       imageUrl: buildingImage 
     },
     { 
-      title: 'Data Centers & Servers', 
-      description: 'High-precision cooling systems designed for 100% uptime. We implement advanced hot/cold aisle containment and redundant cooling loads to safeguard sensitive hardware from thermal stress.', 
-      imageUrl: datacentreImage 
+      title: 'Luxurious Bunglows', 
+      description: 'Hygiene-centric climate control solutions adhering to strict FDA/FSSAI standards. Specialized ventilation to prevent contamination.', 
+      imageUrl: foodImage 
     },
-    { 
-      title: 'Showrooms', 
-      description: 'Creating inviting retail experiences through optimized air distribution. Our VRF systems offer modular control, ensuring consistent comfort for customers while maintaining high energy efficiency.', 
-      imageUrl: showroomImage 
+    {
+      title: 'Healthcare',
+      description: 'Critical air filtration and contamination control for hospitals. Ensuring sterile environments with HEPA filtration.',
+      imageUrl: healthcareImage 
     },
-    { 
-      title: 'Warehouses', 
-      description: 'Heavy-duty ventilation and large-scale temperature management for industrial storage. We focus on high air-exchange rates and humidity control to protect inventory integrity.', 
-      imageUrl: warehouseImage 
+    {
+      title: 'Education',
+      description: 'Optimizing learning environments with quiet, efficient air conditioning and healthy indoor air quality.',
+      imageUrl: EducationImage 
+    },
+    {
+      title: 'Finance & Banking',
+      description: 'Reliable climate control for data centers and banking hubs ensuring servers remain at optimal temperatures.',
+      imageUrl: BankingImage 
+    },
+    {
+      title: 'Manufacturing',
+      description: 'Heavy-duty industrial air solutions for factories focusing on heat extraction and process cooling.',
+      imageUrl: ManufacturingImage 
+    },
+    {
+      title: 'Food Industries',
+      description: 'Hygiene-centric climate control solutions adhering to strict FDA/FSSAI standards for processing and packaging units.',
+      imageUrl: foodImage 
     },
     { 
       title: 'Office Industries', 
-      description: 'Comprehensive workspace climate management that boosts productivity. We deploy intelligent IAQ sensors and energy-efficient VRV systems tailored for modern corporate infrastructure.', 
+      description: 'Comprehensive workspace climate management using intelligent IAQ sensors and energy-efficient VRV systems.', 
       imageUrl: officeindustriesImage 
-    }
+    },
   ];
 
   return (
@@ -92,11 +105,11 @@ export const IndustriesSection: React.FC = () => {
         
         <div className="text-center mb-16">
           <motion.h2 
-          className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }} 
-          transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-[#4A3F35] mb-4 md:text-4xl text-3xl font-bold tracking-tight"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
             Industries We Serve
           </motion.h2>
@@ -104,20 +117,26 @@ export const IndustriesSection: React.FC = () => {
           <div className="w-20 h-1 bg-[#f8be4c] mx-auto mb-6"></div>
 
           <motion.p 
-          className="text-gray-700 max-w-3xl text-lg font-medium mx-auto leading-relaxed"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }} // Continuous effect
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-gray-700 max-w-3xl text-lg font-medium mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Delivering precision-engineered HVAC solutions across diverse sectors. From mission-critical cooling to sustainable climate comfort, we adapt to the unique engineering requirements of your industry.
+            Delivering precision-engineered HVAC solutions across diverse sectors.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Responsive Grid Breakdown:
+          - grid-cols-1: Mobile (1 card)
+          - sm:grid-cols-2: Tablet (2 cards)
+          - lg:grid-cols-4: Desktop (4 cards) 
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {industries.map((industry, index) => (
             <IndustryCard
               key={index}
+              index={index}
               title={industry.title}
               description={industry.description}
               imageUrl={industry.imageUrl}

@@ -10,6 +10,7 @@ import BankingImage from '../assets/Banking.jpg';
 import ManufacturingImage from '../assets/manufacturing.jpg';
 import HealthcareImage from '../assets/healthcare.jpg';
 import IndustriesHero from '../assets/industrieshero.jpg'
+import foodImage from '../assets/industriesimages/Food.png'
 
 export function Industries() {
   const industries = [
@@ -60,6 +61,14 @@ export function Industries() {
       description: 'Heavy-duty industrial air solutions for factories and assembly lines. We specialize in heat extraction, dust collection, and process cooling.',
       stats: '150+ Industrial Facilities',
       features: ['Process Cooling', 'Exhaust Systems', 'Dust Collection']
+    },
+    {
+      id: 'food-industries',
+      image: foodImage, 
+      name: 'Food Industries',
+      description: 'Hygiene-centric climate control solutions that adhere to strict FDA/FSSAI standards. We provide specialized ventilation to prevent contamination, manage humidity, and maintain food freshness across processing and packaging units.',
+      stats: '120+ Units Optimized',
+      features: ['FDA/FSSAI Compliance', 'Contamination Control', 'Humidity Management']
     },
   ];
 

@@ -17,6 +17,7 @@ const navLinks = [
       { name: 'Cold Storage Solutions', to: '/solutions#cold-storage' },
       { name: 'Fresh Air Systems', to: '/solutions#fresh-air' },
       { name: 'Lift and Staircase Pressurization', to: '/solutions#staircase-pressurization' },
+      
     ]
   },
   { 
@@ -30,6 +31,7 @@ const navLinks = [
       { name: 'Education', to: '/industries#education' },
       { name: 'Finance & Banking', to: '/industries#finance-banking' },
       { name: 'Manufacturing', to: '/industries#manufacturing' },
+      {name:'Food Industries', to:'/industries#food-industries'}
       
     ]
   },

@@ -130,7 +130,6 @@ export const TestimonialsSection: React.FC = () => {
       {/* --- Continuous Scrolling Section --- */}
       <div className="testimonial-fade relative flex overflow-hidden mt-10">
         <div className="testimonial-track whitespace-nowrap flex items-stretch py-4">
-          {/* Duplicating TEST_DATA to create the infinite loop effect */}
           {[...TEST_DATA, ...TEST_DATA].map((t, index) => (
             <article
               key={`${t.id}-${index}`}
@@ -156,7 +155,7 @@ export const TestimonialsSection: React.FC = () => {
               </blockquote>
 
               <div className="mt-auto">
-                <div className="text-sm text-[#1a2c6d] font-bold">
+                <div className="text-sm text-[#4A3F35] font-bold">
                   {t.name}
                 </div>
                 {t.role && (

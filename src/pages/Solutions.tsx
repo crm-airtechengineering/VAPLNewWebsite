@@ -143,7 +143,7 @@ const Solutions: React.FC = () => {
 
                   <Link 
                     to="/contact" 
-                    className="inline-flex items-center text-[#1a2c6d] font-bold hover:text-blue-800 transition-colors group/btn"
+                    className="inline-flex items-center text-[#4A3F35] font-bold hover:text-blue-800 transition-colors group/btn"
                   >
                     Enquire about this solution
                     <svg className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
