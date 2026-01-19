@@ -1,18 +1,7 @@
 import * as React from "react";
-
-<<<<<<< HEAD
-export { cn } from './Utils';
+import { cn } from "./utils"; // Ensure this matches your actual utils filename case (utils or Utils)
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-    function cn(arg0: string, arg1: string, arg2: string, className: string | undefined): string | undefined {
-        throw new Error("Function not implemented.");
-    }
-
-=======
-import { cn } from "./utils";
-
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
->>>>>>> b6595faaee319dd141657dd37b2f8f22ff2a68da
   return (
     <input
       type={type}
