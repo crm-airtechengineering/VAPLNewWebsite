@@ -1,11 +1,12 @@
 require('dotenv').config(); 
 const express = require('express');
 const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend'); // Switch to Resend
 const cors = require('cors');
 const multer = require('multer');
 
 const app = express();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Middleware
 app.use(cors({
@@ -23,8 +24,8 @@ app.get('/api/health', (req, res) => {
 
 // 2. Database Connection
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Success: Connected to MongoDB"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err.message));
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch(err => console.error("❌ MongoDB Error:", err.message));
 
 const Application = mongoose.model('Application', new mongoose.Schema({
   fullName: String,
@@ -41,80 +42,45 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } 
 }).single('resume');
 
-// 4. Final Port-Switch Strategy (Bypassing Render Port Blocks)
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 2525, // Alternative port often left open by cloud providers
-  secure: false, 
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  debug: true,
-  logger: true,
-  connectionTimeout: 45000,
-  socketTimeout: 60000
-});
-
-// 5. Submit Route
+// 4. Submit Route
 app.post('/api/apply', (req, res) => {
   upload(req, res, async (err) => {
-    if (err) {
-      console.error("❌ Multer Error:", err);
-      return res.status(400).json({ success: false, message: "File upload error or file too large" });
-    }
+    if (err) return res.status(400).json({ success: false, message: "File too large" });
 
     try {
       const { fullName, email, position, message } = req.body;
       const file = req.file;
 
-      // Save to MongoDB First (This is working)
+      // Save to MongoDB
       const newApp = new Application({ 
         fullName, email, position, message,
         resumeName: file ? file.originalname : 'No CV'
       });
       await newApp.save();
-      console.log("💾 Application saved to Database");
+      console.log("💾 Saved to DB");
 
-      // Attempt Email Sending
-      try {
-        // We do not 'await' this if we want the user response to be instant,
-        // but here we await to confirm success/fail in logs.
-        await transporter.sendMail({
-          from: `"VAPL Web Portal" <${process.env.EMAIL_USER}>`,
-          to: 'crm@vakhariaairtech.com',
-          replyTo: email,
-          subject: `New Application: ${fullName}`,
-          html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; border: 1px solid #eee;">
-              <h2 style="color: #1d4ed8;">New Career Application</h2>
-              <p><strong>Name:</strong> ${fullName}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Position:</strong> ${position}</p>
-              <p><strong>Message:</strong></p>
-              <div style="background: #f9fafb; padding: 15px; border-radius: 5px;">${message}</div>
-              <br />
-              <p style="font-size: 12px; color: #9ca3af;">Sent from Vakharia Airtech Website</p>
-            </div>
-          `,
-          attachments: file ? [{ filename: file.originalname, content: file.buffer }] : []
-        });
-        console.log("📧 Email sent successfully");
-      } catch (emailErr) {
-        console.error("❌ Nodemailer Error Detail:", emailErr.message);
+      // Send Email via API (Not SMTP)
+      const { data, error } = await resend.emails.send({
+        from: 'Acme <onboarding@resend.dev>', // You can verify your domain later to change this
+        to: 'crm@vakhariaairtech.com',
+        subject: `New Application: ${fullName}`,
+        html: `<h3>New Application</h3><p><strong>Name:</strong> ${fullName}</p><p><strong>Position:</strong> ${position}</p><p><strong>Message:</strong> ${message}</p>`,
+        attachments: file ? [{ filename: file.originalname, content: file.buffer }] : []
+      });
+
+      if (error) {
+        console.error("❌ Resend API Error:", error);
+      } else {
+        console.log("📧 Email sent via API!");
       }
 
-      // Return success because data is already in DB
       res.status(200).json({ success: true, message: "Application received!" });
     } catch (error) {
       console.error("❌ Route Error:", error);
-      res.status(500).json({ success: false, message: "Internal Server Error", details: error.message });
+      res.status(500).json({ success: false, message: "Server Error" });
     }
   });
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 API Server on port ${PORT}`));
