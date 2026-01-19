@@ -1,74 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Button } from "../components/ui";
 import { Mail, Phone, MapPin, Send, Loader2, Paperclip } from 'lucide-react';
 
+// Define the shape of our backend response for better TS safety
+interface BackendResponse {
+  success: boolean;
+  message: string;
+}
+
 export function Contact() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  // Vite-specific environment variable access
+  const API_BASE_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000";
+
+  const [formData, setFormData] = useState({ fullName: '', email: '', subject: '', message: '' });
   const [resume, setResume] = useState<File | null>(null);
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Ref to manually clear the file input field after submission
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // UX Improvement: Pre-wake the Render server when the component mounts
+  // Pre-wake server on component mount (UX improvement for Render free tier)
   useEffect(() => {
-    fetch('https://vaplbackend.onrender.com/api/health')
-      .then(() => console.log("Backend is awake"))
-      .catch(() => console.log("Backend is warming up..."));
-  }, []);
+    fetch(`${API_BASE_URL}/api/health`)
+      .then(() => console.log("🚀 Backend is awake and ready"))
+      .catch(() => console.log("⏳ Backend is warming up..."));
+  }, [API_BASE_URL]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (status) setStatus(''); // Clear status when user starts typing
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit check
-        setStatus('❌ File is too large (Max 5MB)');
-        return;
-      }
-      setResume(file);
-      setStatus(''); // Clear error if file is valid
+    const file = e.target.files?.[0];
+    if (file && file.size > 5 * 1024 * 1024) {
+      setStatus('❌ File too large (Max 5MB)');
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
     }
+    setResume(file || null);
+    setStatus('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setStatus('Sending... (Render server may take 30s to wake up)');
+    setStatus('Sending... (May take 30s if server was asleep)');
 
     const data = new FormData();
     data.append('fullName', formData.fullName);
     data.append('email', formData.email);
-    data.append('position', formData.subject);
+    data.append('position', formData.subject); // Matches backend 'position' field
     data.append('message', formData.message);
+    
     if (resume) {
-      data.append('resume', resume);
+      data.append('resume', resume); // Matches backend upload.single('resume')
     }
 
     try {
-      const response = await fetch('https://vaplbackend.onrender.com/api/apply', {
-        method: 'POST',
-        // Note: Don't set Content-Type header manually when sending FormData
-        body: data,
+      const response = await fetch(`${API_BASE_URL}/api/apply`, { 
+        method: 'POST', 
+        body: data 
       });
 
-      const result = await response.json();
+      const result: BackendResponse = await response.json();
 
       if (response.ok) {
-        setStatus('✅ Message sent successfully!');
+        setStatus('✅ Application sent successfully!');
+        // Reset Form
         setFormData({ fullName: '', email: '', subject: '', message: '' });
         setResume(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
       } else {
         setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
       }
     } catch (error) {
-      console.error("Submission Error:", error);
-      setStatus('❌ Connection Error: Is the backend running? Check your console.');
+      console.error("Submission error:", error);
+      setStatus('❌ Connection Error. Is the backend running?');
     } finally {
       setLoading(false);
     }
@@ -82,7 +91,7 @@ export function Contact() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Info Side */}
+          {/* Left: Contact Info */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold">Contact Information</h3>
             <div className="flex items-center gap-4">
@@ -99,7 +108,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Form Side */}
+          {/* Right: The Form */}
           <Card className="p-8 shadow-lg bg-white border-none">
             <form onSubmit={handleSubmit} className="space-y-4">
               <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" />
@@ -111,7 +120,13 @@ export function Contact() {
                 <label className="text-sm font-medium text-gray-700">Attach Resume (Optional)</label>
                 <div className="flex items-center gap-2 border p-3 rounded-md bg-gray-50 border-dashed border-gray-300">
                   <Paperclip className="w-4 h-4 text-gray-400" />
-                  <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="text-sm cursor-pointer" />
+                  <input 
+                    type="file" 
+                    ref={fileInputRef}
+                    accept=".pdf,.doc,.docx" 
+                    onChange={handleFileChange} 
+                    className="text-sm cursor-pointer" 
+                  />
                 </div>
               </div>
 
