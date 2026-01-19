@@ -41,25 +41,22 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } 
 }).single('resume');
 
-// 4. Final Optimized Email Setup
-// Added debug: true and logger: true to help identify the exact timeout point
+// 4. Final Port-Switch Strategy (Bypassing Render Port Blocks)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // Must be false for 587
+  port: 2525, // Alternative port often left open by cloud providers
+  secure: false, 
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
   tls: {
-    rejectUnauthorized: false, // Essential for cloud hosting environments
-    minVersion: 'TLSv1.2'
+    rejectUnauthorized: false
   },
-  debug: true,   // Show SMTP traffic in logs
-  logger: true,  // Log information to console
-  connectionTimeout: 40000, // 40 seconds
-  greetingTimeout: 30000,   // 30 seconds
-  socketTimeout: 60000      // 60 seconds
+  debug: true,
+  logger: true,
+  connectionTimeout: 45000,
+  socketTimeout: 60000
 });
 
 // 5. Submit Route
