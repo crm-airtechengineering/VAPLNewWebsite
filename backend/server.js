@@ -41,24 +41,25 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } 
 }).single('resume');
 
-// 4. Hardened SMTP Setup (Pool & Direct SMTP)
-// This bypasses common cloud-provider connection blocks
+// 4. Final Optimized Email Setup
+// Added debug: true and logger: true to help identify the exact timeout point
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // Must be false for Port 587
-  pool: true,    // Keeps connection open for faster sending
+  secure: false, // Must be false for 587
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS // 16-character App Password
+    pass: process.env.EMAIL_PASS
   },
   tls: {
-    rejectUnauthorized: false, // Prevents certificate handshake timeouts
-    minVersion: "TLSv1.2"
+    rejectUnauthorized: false, // Essential for cloud hosting environments
+    minVersion: 'TLSv1.2'
   },
-  connectionTimeout: 30000, // 30 seconds
-  greetingTimeout: 20000,   // 20 seconds
-  socketTimeout: 45000      // 45 seconds
+  debug: true,   // Show SMTP traffic in logs
+  logger: true,  // Log information to console
+  connectionTimeout: 40000, // 40 seconds
+  greetingTimeout: 30000,   // 30 seconds
+  socketTimeout: 60000      // 60 seconds
 });
 
 // 5. Submit Route
@@ -73,7 +74,7 @@ app.post('/api/apply', (req, res) => {
       const { fullName, email, position, message } = req.body;
       const file = req.file;
 
-      // Save to MongoDB First
+      // Save to MongoDB First (This is working)
       const newApp = new Application({ 
         fullName, email, position, message,
         resumeName: file ? file.originalname : 'No CV'
@@ -83,6 +84,8 @@ app.post('/api/apply', (req, res) => {
 
       // Attempt Email Sending
       try {
+        // We do not 'await' this if we want the user response to be instant,
+        // but here we await to confirm success/fail in logs.
         await transporter.sendMail({
           from: `"VAPL Web Portal" <${process.env.EMAIL_USER}>`,
           to: 'crm@vakhariaairtech.com',
@@ -104,12 +107,10 @@ app.post('/api/apply', (req, res) => {
         });
         console.log("📧 Email sent successfully");
       } catch (emailErr) {
-        // If email fails, we log it but don't crash the response 
-        // because the data is already safe in MongoDB.
         console.error("❌ Nodemailer Error Detail:", emailErr.message);
       }
 
-      // Return success because data is saved in DB even if email is slow/blocked
+      // Return success because data is already in DB
       res.status(200).json({ success: true, message: "Application received!" });
     } catch (error) {
       console.error("❌ Route Error:", error);
