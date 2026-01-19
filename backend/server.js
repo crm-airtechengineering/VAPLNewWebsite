@@ -6,9 +6,6 @@ const multer = require('multer');
 require('dotenv').config();
 
 const app = express();
-
-// 1. Enhanced CORS Configuration
-// This allows your Vercel frontend to communicate with your Render backend
 app.use(cors({
   origin: 'https://vakhariaairtech.vercel.app',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -106,5 +103,10 @@ app.post('/api/apply', upload.single('resume'), async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Use Render's port, or 5000 for local testing
+const PORT = process.env.PORT || 10000; 
+
+// We add '0.0.0.0' to make sure Render can 'see' the server
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is officially live on port ${PORT}`);
+});
