@@ -41,13 +41,18 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } 
 }).single('resume');
 
-// 4. Email Setup
+// 4. Enhanced Email Setup (Fixes Timeout)
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // Use SSL for Port 465
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS // Must be 16-character App Password
-  }
+    pass: process.env.EMAIL_PASS // Use 16-character App Password (no spaces)
+  },
+  connectionTimeout: 10000, // Wait 10 seconds for connection
+  greetingTimeout: 5000,
+  socketTimeout: 15000
 });
 
 // 5. Submit Route
@@ -75,20 +80,26 @@ app.post('/api/apply', (req, res) => {
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
           to: 'crm@vakhariaairtech.com',
+          replyTo: email, // Allows you to click 'Reply' in Gmail to reach the applicant
           subject: `New Application: ${fullName}`,
           html: `
-            <h3>New Job Application</h3>
-            <p><strong>Name:</strong> ${fullName}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Position:</strong> ${position}</p>
-            <p><strong>Message:</strong> ${message}</p>
+            <div style="font-family: sans-serif; line-height: 1.5; color: #333;">
+              <h2 style="color: #2563eb;">New Job Application Received</h2>
+              <hr />
+              <p><strong>Name:</strong> ${fullName}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Position Applied For:</strong> ${position}</p>
+              <p><strong>Message:</strong><br />${message}</p>
+              <hr />
+              <p style="font-size: 0.8em; color: #666;">This application was sent via the Vakharia Airtech website portal.</p>
+            </div>
           `,
           attachments: file ? [{ filename: file.originalname, content: file.buffer }] : []
         });
         console.log("📧 Email sent successfully");
       } catch (emailErr) {
-        console.error("❌ Nodemailer Error:", emailErr);
-        // We don't return 500 here so the user knows their data was at least saved to the DB
+        // Log the exact error for debugging but don't stop the success response
+        console.error("❌ Nodemailer Error Detail:", emailErr.message);
       }
 
       res.status(200).json({ success: true, message: "Sent successfully!" });
