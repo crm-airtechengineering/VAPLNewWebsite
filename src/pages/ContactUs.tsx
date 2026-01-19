@@ -1,172 +1,133 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button } from "../components/ui";
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Loader2, Paperclip } from 'lucide-react';
 
 export function Contact() {
-  // 1. State to hold form data
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     subject: '',
     message: ''
   });
-
+  const [resume, setResume] = useState<File | null>(null);
   const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // 2. Handle input changes
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  // UX Improvement: Pre-wake the Render server when the component mounts
+  useEffect(() => {
+    fetch('https://vaplbackend.onrender.com/api/health')
+      .then(() => console.log("Backend is awake"))
+      .catch(() => console.log("Backend is warming up..."));
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 3. Handle Form Submission
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit check
+        setStatus('❌ File is too large (Max 5MB)');
+        return;
+      }
+      setResume(file);
+      setStatus(''); // Clear error if file is valid
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('Sending...');
+    setLoading(true);
+    setStatus('Sending... (Render server may take 30s to wake up)');
+
+    const data = new FormData();
+    data.append('fullName', formData.fullName);
+    data.append('email', formData.email);
+    data.append('position', formData.subject);
+    data.append('message', formData.message);
+    if (resume) {
+      data.append('resume', resume);
+    }
 
     try {
-      const response = await fetch('http://localhost:5000/api/apply', {
+      const response = await fetch('https://vaplbackend.onrender.com/api/apply', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          position: formData.subject, // Mapping subject to 'position' for your backend
-          message: formData.message
-        }),
+        // Note: Don't set Content-Type header manually when sending FormData
+        body: data,
       });
+
+      const result = await response.json();
 
       if (response.ok) {
         setStatus('✅ Message sent successfully!');
         setFormData({ fullName: '', email: '', subject: '', message: '' });
+        setResume(null);
       } else {
-        setStatus('❌ Failed to send message.');
+        setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
       }
     } catch (error) {
-      console.error(error);
-      setStatus('❌ Error connecting to server.');
+      console.error("Submission Error:", error);
+      setStatus('❌ Connection Error: Is the backend running? Check your console.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="min-h-screen bg-gray-100 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="min-h-screen bg-gray-100 py-20 px-4">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Have a project in mind? Let's discuss how we can help you achieve your goals.
-          </p>
+          <h2 className="text-4xl font-bold text-gray-900">Get In Touch</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Contact Information
-            </h3>
-            
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Mail className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="ml-4">
-                <h4 className="font-bold text-gray-900 mb-1">Email</h4>
-                <p className="text-gray-600">crm@vakhariaairtech.com</p>
-              </div>
+          {/* Info Side */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold">Contact Information</h3>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-100 rounded-full"><Mail className="text-blue-600"/></div>
+              <p className="text-gray-700">crm@vakhariaairtech.com</p>
             </div>
-
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Phone className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="ml-4">
-                <h4 className="font-bold text-gray-900 mb-1">Phone</h4>
-                <p className="text-gray-600">+91  9049002037</p>
-              </div>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-100 rounded-full"><Phone className="text-blue-600"/></div>
+              <p className="text-gray-700">+91 9049002037</p>
             </div>
-
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="ml-4">
-                <h4 className="font-bold text-gray-900 mb-1">Address</h4>
-                <p className="text-gray-600">
-                Vakharia Airtech Pvt. Ltd.<br />
-                S. No. 53/6, 'Saffron Avenue',A Building, Showroom No 1 & 2,Off Mumbai-Bangalore Highway,Opp. CNG Pump, Bavdhan, Pune - 411 021 Maharashtra
-                </p>
-              </div>
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-blue-100 rounded-full"><MapPin className="text-blue-600"/></div>
+              <p className="text-gray-700">Vakharia Airtech Pvt. Ltd., Bavdhan, Pune</p>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <Card className="p-8">
+          {/* Form Side */}
+          <Card className="p-8 shadow-lg bg-white border-none">
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input 
-                  type="text" 
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="Your name"
-                  required 
-                />
+              <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input type="text" name="subject" placeholder="Subject / Position" value={formData.subject} onChange={handleChange} required className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" />
+              <textarea name="message" placeholder="Message" value={formData.message} onChange={handleChange} rows={4} required className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" />
+              
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700">Attach Resume (Optional)</label>
+                <div className="flex items-center gap-2 border p-3 rounded-md bg-gray-50 border-dashed border-gray-300">
+                  <Paperclip className="w-4 h-4 text-gray-400" />
+                  <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="text-sm cursor-pointer" />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input 
-                  type="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="your@email.com"
-                  required 
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                <input 
-                  type="text" 
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="How can we help?"
-                  required 
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea 
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  rows={4}
-                  placeholder="Tell us about your project..."
-                  required
-                ></textarea>
-              </div>
-
-              {/* SPACING FIX: Center the button with px-12 for horizontal space */}
-              <div className="flex justify-center pt-4">
-                <Button type="submit" className="px-12 py-3 flex items-center gap-2">
-                  <Send className="w-4 h-4" />
-                  Send Message
-                </Button>
-              </div>
+              <Button 
+                type="submit" 
+                disabled={loading} 
+                className={`w-full py-6 flex justify-center items-center gap-2 text-white font-bold rounded-md transition-all ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+              >
+                {loading ? <Loader2 className="animate-spin" /> : <Send size={18} />}
+                {loading ? 'Sending...' : 'Send Message'}
+              </Button>
 
               {status && (
-                <p className={`text-center mt-4 font-medium ${status.includes('✅') ? 'text-green-600' : 'text-blue-600'}`}>
+                <div className={`text-center mt-4 p-3 rounded-md text-sm font-semibold ${status.includes('✅') ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                   {status}
-                </p>
+                </div>
               )}
             </form>
           </Card>
