@@ -9,8 +9,19 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Middleware
+// app.use(cors({
+//   origin: ['https://vakhariaairtech.vercel.app', 'http://localhost:3000'],
+//   methods: ['GET', 'POST', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true
+// }));
 app.use(cors({
-  origin: ['https://vakhariaairtech.vercel.app', 'http://localhost:3000'],
+  origin: [
+    'https://www.vakhariaairtech.com', 
+    'https://vakhariaairtech.com', 
+    'https://vakhariaairtech.vercel.app', 
+    'http://localhost:3000'
+  ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
