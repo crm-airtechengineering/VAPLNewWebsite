@@ -46,7 +46,7 @@ export function Contact() {
     const data = new FormData();
     data.append('fullName', formData.fullName);
     data.append('email', formData.email);
-    data.append('position', formData.subject); // Matches backend 'position'
+    data.append('position', formData.subject); 
     data.append('message', formData.message);
     if (resume) data.append('resume', resume); // Matches backend upload.single('resume')
 
