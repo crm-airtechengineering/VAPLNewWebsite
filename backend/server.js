@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { Resend } = require('resend');
+const mongoose = require('mongoose');
 
 // 1. You MUST run config() before creating the Resend instance
 dotenv.config(); 
