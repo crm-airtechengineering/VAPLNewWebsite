@@ -35,15 +35,15 @@ export function About() {
   ];
 
   const leadership = [
-    { name: 'Piyush Vakharia', role: 'Managing Partner', desc: 'Expertise in industrial HVAC design.' },
-    { name: 'Dipesh Vakharia', role: 'Managing Partner', desc: 'Specializing in turnkey project management.' },
-    { name: 'Rakesh Vakharia', role: 'Managing Partner', desc: 'Focused on cleanroom standards and compliance.' },
-    { name: 'Harshal Vakharia', role: 'Managing Partner', desc: 'Driving growth through sustainable air technology solutions.' },
-    { name: 'Bhagatsingh Powar', role: 'Project Manager', desc: 'Focused on resource optimization and quality-driven site supervision.' },
-    { name: 'Nischal Jadhav', role: 'QA Lead', desc: 'Ensuring rigorous safety protocols across every technical phase.' },
-    { name: 'Pramod Patil', role: 'HVAC Consultant', desc: 'Specializing in energy-efficient climate control solutions.' },
+    { name: 'Piyush Vakharia', role: 'Managing Director', desc: 'Expertise in industrial HVAC design.' },
+    { name: 'Dipesh Vakharia', role: 'Director', desc: 'Specializing in turnkey project management.' },
+    { name: 'Rakesh Vakharia', role: 'Director', desc: 'Focused on cleanroom standards and compliance.' },
+    { name: 'Harshal Vakharia', role: 'Director', desc: 'Driving growth through sustainable air technology solutions.' },
+    { name: 'Bhagatsingh Powar', role: 'General Manager', desc: 'Focused on resource optimization and quality-driven site supervision.' },
+    { name: 'Nischal Jadhav', role: 'Head Service Department', desc: 'Ensuring rigorous safety protocols across every technical phase.' },
+    { name: 'Pramod Patil', role: 'General Manager', desc: 'Specializing in energy-efficient climate control solutions.' },
     { name: 'Omkar Bhesare', role: 'Account Head', desc: 'Managing financial operations and long-term reliability.' },
-    { name: 'Yuvraj Nerkar', role: 'Sales & Estimation', desc: 'Expert in project feasibility and cost-efficient air solutions.' },
+    { name: 'Yuvraj Nerkar', role: 'Sales & Estimation Head', desc: 'Expert in project feasibility and cost-efficient air solutions.' },
     { name: 'Jitendra Desale', role: 'Design Head', desc: 'Leading technical drafts and advanced airflow modeling.' },
     { name: 'Dadasaheb Adsare', role: 'Project Head', desc: 'Overseeing large-scale execution and industrial delivery.' }
   ];

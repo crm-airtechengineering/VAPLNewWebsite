@@ -81,8 +81,8 @@ app.post('/api/apply', (req, res) => {
       const { data, error } = await resend.emails.send({
         from: 'Acme <onboarding@resend.dev>', // You can verify your domain later to change this
         to: 'crm@vakhariaairtech.com',
-        subject: `New Application: ${fullName}`,
-        html: `<h3>New Application</h3><p><strong>Name:</strong> ${fullName}</p><p><strong>Position:</strong> ${position}</p><p><strong>Message:</strong> ${message}</p>`,
+        subject: `New Enquiry: ${fullName}`,
+        html: `<h3>New Enquiry</h3><p><strong>Name:</strong> ${fullName}</p><p><strong>Position:</strong> ${position}</p><p><strong>Message:</strong> ${message}</p>`,
         attachments: file ? [{ filename: file.originalname, content: file.buffer }] : []
       });
 
