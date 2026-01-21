@@ -1,11 +1,16 @@
-require('dotenv').config(); 
 const express = require('express');
-const mongoose = require('mongoose');
-const { Resend } = require('resend'); // Switch to Resend
 const cors = require('cors');
-const multer = require('multer');
+const dotenv = require('dotenv');
+const { Resend } = require('resend');
+
+// 1. You MUST run config() before creating the Resend instance
+dotenv.config(); 
 
 const app = express();
+app.use(cors());
+app.use(express.json());
+
+// 2. Now initialize Resend - it will now find the key in process.env
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Middleware
@@ -28,7 +33,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-
+// 1. Health Check
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: "Server is awake" });
 });
