@@ -178,7 +178,7 @@ export function Contact() {
 
     {/* Message Field */}
     <div className="space-y-1.5">
-      <label className="text-[11px] font-bold uppercase text-gray-500 ml-1">Message *</label>
+      <label className="text-[11px] font-bold uppercase text-gray-500 ml-1">Message</label>
       <textarea 
         name="message" 
         value={formData.message} 
