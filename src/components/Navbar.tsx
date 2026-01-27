@@ -3,11 +3,19 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/Vakharia-Airtech-Logo.png';
 
-const navLinks = [
+// Type definitions for a cleaner codebase
+interface NavItem {
+  name: string;
+  to: string;
+  hasDropdown?: boolean;
+  dropdownItems?: { name: string; to: string }[];
+}
+
+const navLinks: NavItem[] = [
   { name: 'Home', to: '/' },
-  { name: 'About Us', to: '/about' }, 
-  { 
-    name: 'Solutions', 
+  { name: 'About Us', to: '/about' },
+  {
+    name: 'Solutions',
     to: '/solutions',
     hasDropdown: true,
     dropdownItems: [
@@ -17,11 +25,10 @@ const navLinks = [
       { name: 'Cold Storage Solutions', to: '/solutions#cold-storage' },
       { name: 'Fresh Air Systems', to: '/solutions#fresh-air' },
       { name: 'Lift and Staircase Pressurization', to: '/solutions#staircase-pressurization' },
-      
     ]
   },
-  { 
-    name: 'Industries', 
+  {
+    name: 'Industries',
     to: '/industries',
     hasDropdown: true,
     dropdownItems: [
@@ -31,13 +38,11 @@ const navLinks = [
       { name: 'Education', to: '/industries#education' },
       { name: 'Finance & Banking', to: '/industries#finance-banking' },
       { name: 'Manufacturing', to: '/industries#manufacturing' },
-      {name:'Food Industries', to:'/industries#food-industries'}
-      
+      { name: 'Food Industries', to: '/industries#food-industries' }
     ]
   },
   { name: 'Our Work', to: '/ourwork' },
   { name: 'Contact Us', to: '/contact' },
-  //{name:'Career', to:'/career'}
 ];
 
 export function Navbar() {
@@ -46,7 +51,14 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  // UX Logic: Navbar is transparent only on the Home page and before scrolling
   const isTransparent = location.pathname === '/' && !isScrolled;
+
+  // Active State Logic: Determines if the link matches the current URL
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -54,7 +66,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Auto-close mobile menu when path changes
+  // Close menus on navigation
   useEffect(() => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
@@ -80,51 +92,49 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center items-center gap-x-4 lg:gap-x-8 xl:gap-x-12">
-            {navLinks.map((link) => (
-              link.hasDropdown ? (
+            {navLinks.map((link) => {
+              const active = isActive(link.to);
+              
+              return (
                 <div 
                   key={link.name} 
                   className="relative group py-2" 
-                  onMouseEnter={() => setOpenDropdown(link.name)} 
+                  onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)} 
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <Link 
                     to={link.to}
                     className={`text-sm lg:text-[15px] xl:text-lg font-semibold flex items-center gap-1 transition-colors ${
-                      isTransparent ? 'text-white hover:text-blue-200' : 'text-gray-800 hover:text-blue-700'
+                      active 
+                        ? (isTransparent ? 'text-blue-400' : 'text-blue-600') 
+                        : (isTransparent ? 'text-white hover:text-blue-200' : 'text-gray-800 hover:text-blue-600')
                     }`}
                   >
                     {link.name}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                    {link.hasDropdown && (
+                      <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                    )}
                   </Link>
 
                   {/* Dropdown Menu */}
-                  <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-md shadow-xl border border-gray-100 py-3 transition-all duration-300 ${
-                    openDropdown === link.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
-                  }`}>
-                    {link.dropdownItems?.map((item) => (
-                      <Link 
-                        key={item.name} 
-                        to={item.to} 
-                        className="block px-6 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
+                  {link.hasDropdown && (
+                    <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-md shadow-xl border border-gray-100 py-3 transition-all duration-300 ${
+                      openDropdown === link.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                    }`}>
+                      {link.dropdownItems?.map((item) => (
+                        <Link 
+                          key={item.name} 
+                          to={item.to} 
+                          className="block px-6 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <Link 
-                  key={link.name} 
-                  to={link.to} 
-                  className={`text-sm lg:text-[15px] xl:text-lg font-semibold transition-colors ${
-                    isTransparent ? 'text-white hover:text-blue-200' : 'text-gray-800 hover:text-blue-700'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
+              );
+            })}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -142,29 +152,32 @@ export function Navbar() {
         isMenuOpen ? 'max-h-screen py-4 px-6 shadow-lg' : 'max-h-0'
       }`}>
         <div className="flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <div key={link.name} className="flex flex-col gap-2">
-              <Link 
-                to={link.to} 
-                className="text-gray-800 font-bold text-lg"
-              >
-                {link.name}
-              </Link>
-              {link.hasDropdown && (
-                <div className="pl-4 flex flex-col gap-2 border-l-2 border-blue-100">
-                  {link.dropdownItems?.map((item) => (
-                    <Link 
-                      key={item.name} 
-                      to={item.to} 
-                      className="text-gray-600 text-sm hover:text-blue-700 py-1"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+          {navLinks.map((link) => {
+            const active = isActive(link.to);
+            return (
+              <div key={link.name} className="flex flex-col gap-2">
+                <Link 
+                  to={link.to} 
+                  className={`font-bold text-lg transition-colors ${active ? 'text-blue-600' : 'text-gray-800'}`}
+                >
+                  {link.name}
+                </Link>
+                {link.hasDropdown && (
+                  <div className={`pl-4 flex flex-col gap-2 border-l-2 ${active ? 'border-blue-500' : 'border-gray-100'}`}>
+                    {link.dropdownItems?.map((item) => (
+                      <Link 
+                        key={item.name} 
+                        to={item.to} 
+                        className="text-gray-600 text-sm hover:text-blue-600 py-1"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </nav>

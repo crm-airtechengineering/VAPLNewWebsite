@@ -53,11 +53,11 @@ export function Footer() {
       </div>
 
       {/* Reduced vertical padding from py-12 to py-8 */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative max-w-full mx-6 px-4 sm:px-6 lg:px-10 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
           
           {/* 1. Company Info - Column Span 2 */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-1">
             <div className="mb-4">
               <div className="flex flex-col gap-2 mb-2">
                 <img src={Logo} alt="Logo" className="h-20 w-auto object-contain self-start" />
@@ -91,27 +91,12 @@ export function Footer() {
           {/* 2. Quick Links */}
           <div className="lg:col-span-1">
             <h3 className="text-white text-sm mb-4 font-semibold uppercase tracking-wider">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link to={link.to} className="text-xs hover:text-[#f8be4c] transition-colors flex items-center gap-2">
                     <span className="text-[#f8be4c] text-[10px]">✦</span>
                     {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 3. Solutions */}
-          <div className="lg:col-span-1">
-            <h3 className="text-white text-sm mb-4 font-semibold uppercase tracking-wider">Solutions</h3>
-            <ul className="space-y-2">
-              {solutions.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.to} className="text-xs hover:text-[#f8be4c] transition-colors flex items-center gap-2 leading-tight">
-                    <span className="text-[#f8be4c] text-[10px]">✦</span>
-                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -154,6 +139,39 @@ export function Footer() {
                 Connect
               </Button>
             </Link>
+          </div>
+          {/* 4. Associate Branch 1 (Mumbai) */}
+          <div className="lg:col-span-1 lg:pl-4">
+            <h3 className="text-white text-xs mb-3 font-semibold uppercase tracking-wider text-[#f8be4c]">Mumbai Associate</h3>
+            <div className="space-y-1.5">
+              <p className="text-[11px] font-bold text-white uppercase">Be Cool-(CR)</p>
+              <p className="text-[10px] leading-tight text-gray-500">Borivali West, Mumbai - 400092</p>
+              <div className="pt-1 flex flex-col gap-1">
+                <a href="tel:9773300527" className="text-[10px] hover:text-white flex items-center gap-1">
+                  <Phone className="w-2.5 h-2.5 text-[#f8be4c]" /> 9773300527
+                </a>
+                <a href="mailto:becoolac60@gmail.com" className="text-[10px] hover:text-white flex items-center gap-1 truncate">
+                  <Mail className="w-2.5 h-2.5 text-[#f8be4c]" /> becoolac60@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* 5. Associate Branch 2 (Amravati) */}
+          <div className="lg:col-span-1  lg:pl-4">
+            <h3 className="text-white text-lg mb-3 font-semibold uppercase tracking-wider text-[#f8be4c]">Amravati Associate</h3>
+            <div className="space-y-3">
+              <p className="text-[13px] font-bold text-white uppercase">Vakharia Associates</p>
+              <p className="text-[12px] leading-tight text-gray-500">Opp. Hotel Ramgiri, Amravati - 444601</p>
+              <div className="pt-1 flex flex-col gap-1">
+                <a href="tel:9168633501" className="text-[12px] hover:text-white flex items-center gap-1">
+                  <Phone className="w-2.5 h-2.5 text-[#f8be4c]" /> 9168633501
+                </a>
+                <a href="mailto:vakharia.ac@gmail.com" className="text-[10px] hover:text-white flex items-center gap-1 truncate">
+                  <Mail className="w-2.5 h-2.5 text-[#f8be4c]" /> vakharia.ac@gmail.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
