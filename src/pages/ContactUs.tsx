@@ -194,7 +194,7 @@ export function Contact() {
     <Button 
       type="submit" 
       disabled={loading} 
-      className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md text-base flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 mt-2"
+      className="w-50% py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md text-base flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 mt-2"
     >
       {loading ? <Loader2 className="animate-spin w-4 h-4" /> : <Send size={16} />}
       {loading ? 'Processing...' : 'Submit Inquiry'}
