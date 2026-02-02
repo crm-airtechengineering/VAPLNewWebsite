@@ -73,7 +73,7 @@ export function Footer() {
 
           {/* 2. Quick Links */}
           <div>
-            <h3 className="text-white text-lg mb-6 font-bold uppercase tracking-wider">Quick Links</h3>
+            <h3 className="text-white text-lg mb-6 font-bold ">Quick Links</h3>
             <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -88,7 +88,7 @@ export function Footer() {
 
           {/* 3. Head Office (Pune) */}
           <div>
-            <h3 className="text-white text-lg mb-6 font-bold uppercase tracking-wider">Head Office</h3>
+            <h3 className="text-white text-lg mb-6 font-bold">Head Office</h3>
             <div className="flex flex-col gap-5">
               <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group ">
                 <MapPin className="w-5 h-5 text-[#f8be4c] shrink-0 mt-0.5" />
@@ -120,7 +120,7 @@ export function Footer() {
 
           {/* 4. Associate Branch 1 */}
           <div className="flex flex-col gap-5">
-            <h3 className="text-white text-lg mb-1 font-bold leading-tight uppercase tracking-wider">Be Cool-(CR) Associates</h3>
+            <h3 className="text-white text-lg mb-1 font-bold leading-tight ">Be Cool-(CR) Associates</h3>
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#f8be4c] shrink-0 mt-0.5" />
               <p className="text-sm text-white group-hover:text-[#f8be4c]">Borivali West, Mumbai - 400092</p>
@@ -135,7 +135,7 @@ export function Footer() {
 
           {/* 5. Associate Branch 2 */}
           <div className="flex flex-col gap-5">
-            <h3 className="text-white text-lg mb-1 font-bold leading-tight uppercase tracking-wider">Vakharia Associates</h3>
+            <h3 className="text-white text-lg mb-1 font-bold leading-tight ">Vakharia Associates</h3>
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#f8be4c] shrink-0 mt-0.5" />
               <p className="text-sm leading-snug text-white group-hover:text-[#f8be4c]">Borivali West, Mumbai - 400092</p>
