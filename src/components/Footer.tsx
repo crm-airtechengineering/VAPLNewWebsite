@@ -1,10 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Instagram, Facebook, MapPin, Mail, Phone } from 'lucide-react';
+import { Linkedin, Instagram, Facebook, MapPin, Mail, Phone, ArrowUp } from 'lucide-react';
 import { Button } from './ui/button';
 import Logo from '../assets/Vakharia-Airtech-Logo.png';
 
 export function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
   const googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=Vakharia+Airtech+Pvt+Ltd+Bavdhan+Pune";
+
+  // Logic to show/hide button based on scroll position
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const quickLinks = [
     { name: 'About Us', to: '/about' },
@@ -34,6 +57,20 @@ export function Footer() {
 
   return (
     <footer className="bg-[#1F1F1F] text-gray-400 relative overflow-hidden">
+      {/* SCROLL TO TOP BUTTON 
+          UX Note: Using fixed positioning and a high z-index to ensure it stays 
+          visible over all other footer elements once triggered.
+      */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-50 p-3 rounded-full shadow-2xl transition-all duration-300 transform 
+          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}
+          bg-[#FF4500] hover:bg-[#E63E00] text-white hover:scale-110 active:scale-90`}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-6 h-6" />
+      </button>
+
       {/* Abstract Background SVG */}
       <div className="absolute bottom-0 right-0 opacity-5 pointer-events-none hidden sm:block">
         <svg width="400" height="200" viewBox="0 0 500 300" fill="none">
@@ -44,8 +81,7 @@ export function Footer() {
       </div>
 
       {/* Main Container */}
-      <div className="relative max-w-8xl mx-auto px-6 py-10 lg:py-16">
-        
+      <div className="relative max-w-8xl mx-auto px-3 py-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12">
           
           {/* 1. Company Info */}
@@ -151,13 +187,12 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-16 pt-8">
+        <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <p className="text-[10px] text-white text-center md:text-left">
               © {new Date().getFullYear()} Vakharia Airtech Pvt. Ltd. | All Rights Reserved |
               <Link to="/privacy" className="text-[10px] ml-1 text-white hover:text-[#f8be4c] ">Privacy Policy</Link>
             </p>
-               
           </div>
         </div>
       </div>
