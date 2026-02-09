@@ -81,7 +81,7 @@ export function Contact() {
                 </a>
                 <div className="pt-2 border-t border-gray-100">
                   <p className="text-sm font-bold text-[#001f3f]">Email Us:</p>
-                  <a href="mailto:airtech@airtechpune.com" className="text-blue-600 hover:underline block">airtech@airtechpune.com</a>
+                  <a href="mailto:airtech@vakhariaairtech.com" className="text-blue-600 hover:underline block">airtech@vakhariaairtech.com</a>
                 </div>
               </div>
             </div>

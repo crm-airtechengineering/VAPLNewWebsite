@@ -56,19 +56,15 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#1F1F1F] text-gray-400 relative overflow-hidden">
-      {/* SCROLL TO TOP BUTTON 
-          UX Note: Using fixed positioning and a high z-index to ensure it stays 
-          visible over all other footer elements once triggered.
-      */}
+    <footer className="bg-[#636363] text-gray-400 relative overflow-hidden">
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-50 p-3 rounded-full shadow-2xl transition-all duration-300 transform 
+        className={`fixed bottom-8 right-4 z-50 p-3 rounded-full shadow-2xl transition-all duration-300 transform 
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}
           bg-[#FF4500] hover:bg-[#E63E00] text-white hover:scale-110 active:scale-90`}
         aria-label="Scroll to top"
       >
-        <ArrowUp className="w-6 h-6" />
+        <ArrowUp className="w-4 h-4" />
       </button>
 
       {/* Abstract Background SVG */}
@@ -134,14 +130,14 @@ export function Footer() {
               </a>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#f8be4c] shrink-0 " />
-                <a href="mailto:airtech@airtechpune.com" className="text-sm text-white hover:text-[#f8be4c] break-all">
-                  airtech@airtechpune.com
+                <a href="mailto:airtech@vakhariaairtech.com" className="text-sm text-white hover:text-[#f8be4c] break-all">
+                airtech@vakhariaairtech.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#f8be4c] shrink-0" />
                 <a href="tel:+919049002037" className="text-sm text-white hover:text-[#f8be4c] font-semibold">
-                  +91 9049002037
+                  +91 9049999081
                 </a>
               </div>
               <div className='md:pt-10'>
