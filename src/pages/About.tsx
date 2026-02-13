@@ -7,6 +7,7 @@ import ProfileImg from '../assets/profile.jpg';
 import Industrial from '../assets/IndustrialHVAC.jpg';
 import TeamCollab from '../assets/aitech-team.jpg';
 import BondingImg from '../assets/eventsimages/cricket.jpg'
+import GroupPhoto from '../assets/groupphoto.jpg'
 
 export function About() {
   const features = [
@@ -123,7 +124,7 @@ export function About() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             <div className="aspect-video bg-gray-100 rounded-3xl overflow-hidden shadow-2xl border-4 md:border-8 border-white">
-                <img src={Industrial} alt="HVAC" className="w-full h-full object-cover" />
+                <img src={GroupPhoto} alt="HVAC" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#f8be4c] rounded-full -z-10"></div>
           </motion.div>

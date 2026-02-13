@@ -3,7 +3,7 @@ import { LogoMarquee } from "../components/LogoMarquee"; // Import the new marqu
 import { WhyChooseSection } from '../components/WhyChooseSection';
 import { IndustriesSection } from '../components/IndustriesSection';
 //import { HistorySection } from '../components/HistorySection';
-import { TestimonialsSection } from '../components/TestimonialsSection';
+//import { TestimonialsSection } from '../components/TestimonialsSection';
 import BuildingTrustSection from '../components/BuildingTrustSection';
 
 export function Home() {
@@ -27,7 +27,7 @@ export function Home() {
         {/* History Section */}
         {/* <HistorySection /> */}
 
-        <TestimonialsSection/>
+        {/* <TestimonialsSection/> */}
     </div>
   );
 }
