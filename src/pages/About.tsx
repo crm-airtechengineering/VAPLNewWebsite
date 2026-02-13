@@ -7,7 +7,7 @@ import ProfileImg from '../assets/profile.jpg';
 import Industrial from '../assets/IndustrialHVAC.jpg';
 import TeamCollab from '../assets/aitech-team.jpg';
 import BondingImg from '../assets/eventsimages/cricket.jpg'
-import GroupPhoto from '../assets/groupphoto.jpg'
+import GroupPhoto from '../assets/GroupPhoto.jpg'
 
 export function About() {
   const features = [
